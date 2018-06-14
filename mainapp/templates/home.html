@@ -86,71 +86,87 @@
     </section>
 
     <!-- Download Section -->
+
+
     <section id="download" class="download-section content-section text-center">
-<div class="card-deck">
+      <div class="card-deck">
+         <div class="container">
+            <div class="row">
+               <div class="col-auto d-flex align-items-stretch">
 
-    <div class="card text-white bg-dark mb-3" style="width: 15rem;">
-      <img class="card-img-top" src="{% static 'img/220px-Liliumbulbiferumflowertop.jpg' %}" alt="Card image cap">
-     <div class="card-body">
-      <h3 class="card-title">الحساب الشخصي</h3>
-      <p3 class="card-text">حسابك الخاص الرائع
-      <br>عرفنا عن نفسك واطرح افكارك الرهيبة</p3>
-        <br>
-      <a href="{##}" class="btn btn-primary">اذهب الان</a>
-     </div>
-    </div>
-
-   <div class="card text-white bg-dark mb-3" style="width: 15rem;">
-      <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
-     <div class="card-body">
-      <h3 class="card-title">Telegram</h3>
-      <p3 class="card-text"> نستعرض هنا ابرز قنوات التليقرام الخاصة بنشر العلم</p3>
-        <br>
-     <a href="#" class="btn btn-primary">اذهب الان</a>
-    </div>
-   </div>
-
-   <div class="card text-white bg-dark mb-3" style="width: 15rem;">
-      <img class="card-img-top" src="{% static 'img/YouTube.png' %}" alt="Card image cap">
-     <div class="card-body">
-      <h3 class="card-title">الحساب الشخصي</h3>
-      <p3 class="card-text">حسابك الخاص الرائع
-       <br>عرفنا عن نفسك واطرح افكارك الرهيبة</p3>
-        <br>
-      <a href="#" class="btn btn-primary">اذهب الان</a>
-     </div>
-   </div>
-
-    <div class="card text-white bg-dark mb-3" style="width: 15rem;">
-      <img class="card-img-top" src="{% static 'img/1468222_1.jpg' %}" alt="Card image cap">
-     <div class="card-body">
-      <h3 class="card-title">Study Group</h3>
-      <p3 class="card-text">في هذي الصفحة يسمح لطالب او الطالبة بفتح موضوع علمي ويتم المناقشة فيه والتعبير عن آرائهم حول الموضوع بترك تعليق في الصفحة التابعة للموضوع.
-      <br></p3>
-        <br>
-      <a href="#" class="btn btn-primary">اذهب الان</a>
-     </div>
-    </div>
-
-    <div class="card text-white bg-dark mb-3" style="width: 15rem;">
-      <img class="card-img-top" src="{% static 'img/fresh eyes1.jpg' %}" alt="Card image cap">
-     <div class="card-body">
-      <h3 class="card-title">Fresh Eyes</h3>
-      <p3 class="card-text">
-          هنا حيث يتم تبادل البحوث
-          <br>
-          والمقالات  ليتم التدقيق فيها ومراجعتها من قبل طلاب اخرين
-      </p3>
-        <br>
-      <a href="#" class="btn btn-primary">اذهب الان</a>
-     </div>
-    </div>
-  </div>
-
-  </div>
+                  <div class="card text-white bg-dark mb-3" style="width: 15rem;">
+                       <img class="card-img-top" src="{% static 'img/220px-Liliumbulbiferumflowertop.jpg' %}" alt="Card image cap">
+                       <div class="card-body">
+                          <h3 class="card-title">الحساب الشخصي</h3>
+                          <p3 class="card-text">حسابك الخاص الرائع
+                          <br>عرفنا عن نفسك واطرح افكارك الرهيبة</p3>
+                             <br>
+                           <a href="{##}" class="btn btn-primary">اذهب الان</a>
+                       </div>
+                  </div>
 
 
+                  <div class="card text-white bg-dark mb-3" style="width: 15rem;">
+                     <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
+                     <div class="card-body">
+                      <h3 class="card-title">Telegram</h3>
+                         <p3 class="card-text"> نستعرض هنا ابرز قنوات التليقرام الخاصة بنشر العلم</p3>
+                            <br>
+                         <a href="#" class="btn btn-primary">اذهب الان</a>
+                     </div>
+                  </div>
 
+
+                  <div class="card text-white bg-dark mb-3" style="width: 15rem;">
+                    <img class="card-img-top" src="{% static 'img/YouTube.png' %}" alt="Card image cap">
+                    <div class="card-body">
+                      <h3 class="card-title">videos</h3>
+                      <p3 class="card-text">حسابك الخاص الرائع
+                      <br>عرفنا عن نفسك واطرح افكارك الرهيبة</p3>
+                        <br>
+                      <a href="{% url 'youtube' %}" class="btn btn-primary">اذهب الان</a>
+                    </div>
+                  </div>
+      </div>
+         </div>
+            </div>
+               </div>
+
+
+      <div class="card-deck">
+         <div class="container">
+             <div class="row">
+                <div class="col-lg-24 d-flex ">
+
+                  <div class="card text-white bg-dark mb-3" style="width: 15rem;">
+                   <img class="card-img-top" src="{% static 'img/1468222_1.jpg' %}" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">Study Group</h3>
+                        <p3 class="card-text">في هذي الصفحة يسمح لطالب او الطالبة بفتح موضوع علمي ويتم المناقشة فيه والتعبير عن آرائهم حول الموضوع بترك تعليق في الصفحة التابعة للموضوع.
+                              <br></p3>
+                                <br>
+                              <a href="#" class="btn btn-primary">اذهب الان</a>
+                      </div>
+                   </div>
+
+
+                  <div class="card text-white bg-dark bg-3" style="width: 15rem;">
+                      <img class="card-img-top" src="{% static 'img/fresh eyes1.jpg' %}" alt="Card image cap">
+                       <div class="card-body">
+                          <h3 class="card-title">Fresh Eyes</h3>
+                          <p3 class="card-text">
+                              هنا حيث يتم تبادل البحوث
+                              <br>
+                              والمقالات  ليتم التدقيق فيها ومراجعتها من قبل طلاب اخرين
+                          </p3>
+                            <br>
+                          <a href="#" class="btn btn-primary">اذهب الان</a>
+                       </div>
+                  </div>
+      </div>
+         </div>
+            </div>
+               </div>
 
 
     </section>
@@ -165,19 +181,19 @@
 
             <ul class="list-inline banner-social-buttons">
               <li class="list-inline-item">
-                <a href="https://twitter.com/nnouraa88" class="btn btn-default btn-lg">
+                <a href="https://twitter.com/nnouraa88" class="btn btn-primary btn-lg">
                   <i class="fa fa-twitter fa-fw"></i>
                   <span class="network-name">Twitter</span>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="##" class="btn btn-default btn-lg">
+                <a href="##" class="btn btn-primary btn-lg">
                   <i class="fa fa-github fa-fw"></i>
                   <span class="network-name">Github</span>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="##" class="btn btn-default btn-lg">
+                <a href="##" class="btn btn-primary btn-lg">
                   <i class="fa fa-google-plus fa-fw"></i>
                   <span class="network-name">Google</span>
                 </a>
@@ -194,7 +210,7 @@
       <div class="container text-center">
         <p>بُني بأيدٍ طلابيّة
         <br>
-        .حقك في النسخ مكفول</p>
+        &copy.حقك في النسخ مكفول</p>
       </div>
     </footer>
 

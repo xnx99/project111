@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block title%}Youtube{% endblock %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <div style="background-color:black;color:white;padding:150px;">
+      <h5 class="mt-0">{{ Youtube.Video_Title }}</h5>
+
+  <iframe width="850" height="550" src="https://www.youtube.com/embed/tEnCoocmPQM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+</div>
+
+</head>
+<body>
+
+</body>
+</html>
+
+{% endblock %}

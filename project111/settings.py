@@ -148,3 +148,5 @@ EMAIL_HOST_PASSWORD = 'yourgmailpassword'
 USERENA_SIGNIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

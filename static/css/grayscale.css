@@ -199,10 +199,7 @@ a:focus, a:hover {
   .content-section {
     padding-top: 200px;
     padding-bottom: 200px;
-  }
-  #map {
-    height: 350px;
-  }
+
 }
 
 .btn {
@@ -277,3 +274,6 @@ img::selection {
 img::-moz-selection {
   background: transparent;
 }
+
+
+
