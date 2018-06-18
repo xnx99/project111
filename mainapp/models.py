@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 
+
 # Create your models here.
 
 Categorization_choices = (
@@ -20,8 +21,9 @@ class Youtube(models.Model):
     uploadedby=models.ForeignKey(User)
     Description=models.TextField(max_length=500)
     Categorization=models.CharField(max_length=1, choices=Categorization_choices)
-    #Date= models.DateTimeField('date published',auto_now_add=True)
+    Date= models.DateTimeField('date published',auto_now_add=True)
     is_deleted= models.BooleanField(verbose_name="هل الفديو محذوف؟",default=False)
+    link=models.TextField(max_length=500)
 
 
 

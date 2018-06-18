@@ -5,6 +5,6 @@ class YoutubeForm(forms.ModelForm):
     class Meta:
         model = Youtube
         fields = ['Title', 'uploadedby', 'Description',
-                   'is_deleted' ]
+                 'link']
 
 
