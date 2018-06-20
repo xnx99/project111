@@ -7,6 +7,8 @@ from . import views
 urlpatterns = [
     url(r'^$' , views.home , name='home'),
     url(r'youtube/',views.youtube , name='youtube'),
-    url(r'uploade_video/',views.Youtubefunction , name='uploade_video'),
+    url(r'upload_video/',views.Youtubefunction , name='upload_video'),
+    url(r'telegram/',views.telegram , name='telegram'),
+    url(r'upload_telegram/',views.telegramfunction , name='upload_telegram'),
 
 ]
