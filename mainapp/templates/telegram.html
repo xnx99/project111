@@ -1,2 +1,25 @@
 {% extends 'index.html' %}
-{% block title%}telegram{% endblock %}
+{% block title%}telegram {% endblock %}
+{% block content %}
+
+
+<section>
+    {% for a in views.telegram_biology%}
+    <li>{{ telegram.objects }}</li>
+    {% endfor %}
+
+</section>
+<section>
+
+    {% for a in views.telegram_physiology%}
+    <li>{{ telegram.objects }}</li>
+    {% endfor %}
+
+</section>
+<section>
+
+    {% for a in views.telegram_microbiology%}
+    <li>{{ telegram.objects }}</li>
+    {% endfor %}
+
+</section>

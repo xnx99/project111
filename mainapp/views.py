@@ -11,6 +11,8 @@ from mainapp.models  import Youtube , telegram_model
 def home(request):
     return render(request, "home.html")#response
 
+#youtube function
+
 def youtube(request):
 
     youtube_videos = Youtube.objects.all()
@@ -18,7 +20,7 @@ def youtube(request):
     youtube = get_object_or_404
     return render(request, 'youtube.html', {'youtube_videos': youtube_videos})
 
-
+#youtube form function
 
 def Youtubefunction(request):
 
@@ -34,14 +36,29 @@ def Youtubefunction(request):
 
     return render(request, "upload_video.html", {'form': form})
 
-def telegram(request):
 
-    telegram_channels = telegram_model.objects.all()
+#telegram functions
 
-    telegram = get_object_or_404
-    return render(request, 'telegram.html', {'telegram_channels': telegram_channels})
+def telegram_biology(request):
+
+    telegram_biology =telegram_model.objects.Categorization.get(biology='biology')
+
+    return render(request, 'telegram.html', {'telegram_biology': telegram_biology })
+def telegram_physiology(request):
+
+    telegram_physiology =telegram_model.objects.Categorization.get(physiology='physiology')
+
+    return render(request, 'telegram.html', {'telegram_physiology': telegram_physiology })
+
+def telegram_microbiology(request):
+
+    telegram_microbiology =telegram_model.objects.Categorization.get(microbiology='microbiology')
 
 
+    return render(request, 'telegram.html', {'telegram_microbiology': telegram_microbiology })
+
+#telegram = get_object_or_404
+#telegram form function
 
 def telegramfunction(request):
 
@@ -56,4 +73,3 @@ def telegramfunction(request):
         form = telegramForm()
 
     return render(request, "upload_telegram.html", {'form': form})
-

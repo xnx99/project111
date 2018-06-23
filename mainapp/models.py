@@ -11,7 +11,8 @@ from django.core.urlresolvers import reverse
 
 Categorization_choices = (
     ('B', u'biology'),
-    ('M', u'microbiology')
+    ('M', u'microbiology'),
+    ('P', u'physiology'),
 )
 
 class Youtube(models.Model):

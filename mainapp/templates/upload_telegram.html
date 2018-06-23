@@ -1,8 +1,10 @@
  {% extends 'index.html' %} {% load bootstrap4 %}
 
- {% block title%}telegram channels{% endblock %}
+ {% block title%}upload telegram channels{% endblock %}
 
 {% block content%}
+
+
 
 <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:upload_telegram' %}" method="post">
 
