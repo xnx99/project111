@@ -1,25 +1,69 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} {% load static %}
 {% block title%}telegram {% endblock %}
 {% block content %}
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<br>
 <section>
-    {% for a in views.telegram_biology%}
-    <li>{{ telegram.objects }}</li>
+    <h5>Biology Section</h5>
+    {% for a in biology%}
+        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ a.Title }}</h5>
+            <p class="card-text">{{ a.Description }}</p>
+            <a href="{{a.link}}" class="btn btn-primary">Go to the channel</a>
+          </div>
+        </div>
+        </div>
     {% endfor %}
 
 </section>
-<section>
 
-    {% for a in views.telegram_physiology%}
-    <li>{{ telegram.objects }}</li>
+<br>
+
+<section>
+    <h5>microbiology Section</h5>
+    {% for a in microbiology%}
+        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ a.Title }}</h5>
+            <p class="card-text">{{ a.Description }}</p>
+            <a href="{{a.link}}" class="btn btn-primary">Go to the channel</a>
+          </div>
+        </div>
+        </div>
     {% endfor %}
 
 </section>
-<section>
 
-    {% for a in views.telegram_microbiology%}
-    <li>{{ telegram.objects }}</li>
+<br>
+
+<section>
+    <h5>physiology Section</h5>
+    {% for a in physiology%}
+        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ a.Title }}</h5>
+            <p class="card-text">{{ a.Description }}</p>
+            <a href="{{a.link}}" class="btn btn-primary">Go to the channel</a>
+          </div>
+        </div>
+        </div>
     {% endfor %}
 
 </section>
+<br>
+    <a href="{% url 'mainapp:upload_telegram'%}" class="btn w3-circle btn-primary" role="button" style="float: right;">+</a>
+<br>
+<br>
+
+{% endblock%}
+
+

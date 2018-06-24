@@ -16,7 +16,6 @@ def home(request):
 def youtube(request):
 
     youtube_videos = Youtube.objects.all()
-
     youtube = get_object_or_404
     return render(request, 'youtube.html', {'youtube_videos': youtube_videos})
 
@@ -39,23 +38,15 @@ def Youtubefunction(request):
 
 #telegram functions
 
-def telegram_biology(request):
+def telegram(request):
 
-    telegram_biology =telegram_model.objects.Categorization.get(biology='biology')
+    biology =telegram_model.objects.filter(Categorization='B')
+    microbiology =telegram_model.objects.filter(Categorization='M')
+    physiology =telegram_model.objects.filter(Categorization='P')
 
-    return render(request, 'telegram.html', {'telegram_biology': telegram_biology })
-def telegram_physiology(request):
-
-    telegram_physiology =telegram_model.objects.Categorization.get(physiology='physiology')
-
-    return render(request, 'telegram.html', {'telegram_physiology': telegram_physiology })
-
-def telegram_microbiology(request):
-
-    telegram_microbiology =telegram_model.objects.Categorization.get(microbiology='microbiology')
-
-
-    return render(request, 'telegram.html', {'telegram_microbiology': telegram_microbiology })
+    return render(request, 'telegram.html', {'biology': biology,
+                                             'microbiology':microbiology ,
+                                             'physiology':physiology})
 
 #telegram = get_object_or_404
 #telegram form function

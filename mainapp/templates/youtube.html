@@ -1,17 +1,33 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} {% load static %}
 {% block title%}youtube{% endblock %}
+
 
 {% block content %}
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<br>
     <meta charset="UTF-8">
-<div style="background-color:black;color:white;width:100%;">
-<div>
         <h5 class="mt-0">{{ video.Title }}</h5>
 <div>
-{% for a in Youtubefunction %}
-       <iframe width="850" height="550" src="https://www.youtube.com/embed/pXRviuL6vMY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+{% for a in youtube_videos %}
+    <div class="card bg-dark text-white" style="width: 18rem;">
+    <div class="col-xl-4 col-md-6 col-sm-12">
+
+      <img class="card-img" src="{% static 'img/YouTube.png' %}" alt="Card image" >
+      <div class="card-img-overlay">
+        <h5 class="card-title">{{ a.Title }}</h5>
+        <p class="card-text">{{ a.Description }}</p>
+        <p class="card-text">{{a.Categorization}}</p>
+      </div>
+    <a href="{{a.link}}">
+    </div>
+    </div>
 {% endfor %}
-</div>
-</div>
-</div>
+
+<br>
+    <a href="{% url 'mainapp:upload_video'%}" class="btn w3-circle btn-danger" role="button" style="float: right;">+</a>
+<br>
+<br>
+
 {% endblock %}
