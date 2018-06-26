@@ -45,6 +45,7 @@
 
 <section>
     <h5>physiology Section</h5>
+    <div class="row">
     {% for a in physiology%}
         <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="card" style="width: 18rem;">
@@ -56,8 +57,9 @@
           </div>
         </div>
         </div>
-    {% endfor %}
 
+    {% endfor %}
+    </div>
 </section>
 <br>
     <a href="{% url 'mainapp:upload_telegram'%}" class="btn w3-circle btn-primary" role="button" style="float: right;">+</a>
