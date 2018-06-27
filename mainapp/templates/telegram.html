@@ -5,8 +5,12 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <br>
+
 <section>
+    <div id="container">
+    <img src="{% static 'img/Telegram.png' %}" alt="" />
     <h5>Biology Section</h5>
+    <div class="row">
     {% for a in biology%}
         <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="card" style="width: 18rem;">
@@ -19,13 +23,15 @@
         </div>
         </div>
     {% endfor %}
-
+    <div>
+    </div>
 </section>
 
 <br>
 
 <section>
     <h5>microbiology Section</h5>
+    <div class="row">
     {% for a in microbiology%}
         <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="card" style="width: 18rem;">
@@ -38,6 +44,7 @@
         </div>
         </div>
     {% endfor %}
+    <div>
 
 </section>
 
@@ -60,7 +67,9 @@
 
     {% endfor %}
     </div>
+</div>
 </section>
+
 <br>
     <a href="{% url 'mainapp:upload_telegram'%}" class="btn w3-circle btn-primary" role="button" style="float: right;">+</a>
 <br>
