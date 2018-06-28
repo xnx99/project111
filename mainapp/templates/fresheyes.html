@@ -1,0 +1,76 @@
+{% extends 'index.html' %} {% load static %}
+{% block title%}Fresh Eyes {% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<br>
+
+<section>
+    <h5>Biology Section</h5>
+    <div class="row">
+    {% for a in biology%}
+        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="#" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ a.Title }}</h5>
+            <p class="card-text">{{ a.Description }}</p>
+            <a href="{{a.file}}" class="btn btn-primary">Go to the channel</a>
+          </div>
+        </div>
+        </div>
+    {% endfor %}
+    <div>
+    </div>
+</section>
+
+<br>
+
+<section>
+    <h5>microbiology Section</h5>
+    <div class="row">
+    {% for a in microbiology%}
+        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="#" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ a.Title }}</h5>
+            <p class="card-text">{{ a.Description }}</p>
+            <a href="{{a.file}}" class="btn btn-primary">Go to the channel</a>
+          </div>
+        </div>
+        </div>
+    {% endfor %}
+    <div>
+
+</section>
+
+<br>
+
+<section>
+    <h5>physiology Section</h5>
+    <div class="row">
+    {% for a in physiology%}
+        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="#" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ a.Title }}</h5>
+            <p class="card-text">{{ a.Description }}</p>
+            <a href="{{a.file}}" class="btn btn-primary">Go to the channel</a>
+          </div>
+        </div>
+        </div>
+
+    {% endfor %}
+    </div>
+</div>
+</section>
+
+<br>
+    <a href="{% url 'mainapp:upload_fresheyes'%}" class="btn w3-circle btn-primary" role="button" style="float: right;">+</a>
+<br>
+<br>
+
+{% endblock%}
