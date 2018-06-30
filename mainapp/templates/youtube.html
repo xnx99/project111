@@ -9,25 +9,98 @@
 <br>
     <meta charset="UTF-8">
         <h5 class="mt-0">{{ video.Title }}</h5>
-<div>
-{% for a in youtube_videos %}
-    <div class="card bg-dark text-white" style="width: 18rem;">
-    <div class="col-xl-4 col-md-6 col-sm-12">
 
-      <img class="card-img" src="{% static 'img/YouTube.png' %}" alt="Card image" >
-      <div class="card-img-overlay">
-        <h5 class="card-title">{{ a.Title }}</h5>
-        <p class="card-text">{{ a.Description }}</p>
-        <p class="card-text">{{a.Categorization}}</p>
-      </div>
-    <a href="{{a.link}}">
-    </div>
-    </div>
-{% endfor %}
-
+<section>
+    <h5>Biology Section</h5>
+    <ul class="thumbnails">
+        <li class="span4">
+            <div class="thumbnail">
+                <div class="row">
+                    {% for a in biology %}
+                      <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
+                      <div class="card bg-dark text-white" style="width: 18rem;">
+                      {%if "embed" in a.link %}
+                          <div class="flex-video widescreen ">
+                            <embed width="269" height="150"
+                                   src="{{a.link}}">
+                          </div>
+                      {% else %}
+                          <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
+                      {% endif %}
+                      <h5 class="card-title">{{ a.Title }}</h5>
+                      <p class="card-text">{{ a.Description }}</p>
+                      <p class="card-text">{{a.Categorization}}</p>
+                      <a href="{{a.link}}">Go to the video</a>
+                      </div>
+                      </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<br>
+<section>
+    <h5>microbiology Section</h5>
+    <ul class="thumbnails">
+        <li class="span4">
+            <div class="thumbnail">
+                <div class="row">
+                    {% for a in microbiology %}
+                      <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
+                      <div class="card bg-dark text-white" style="width: 18rem;">
+                      {%if "embed" in a.link %}
+                          <div class="flex-video widescreen ">
+                            <embed width="269" height="150"
+                                   src="{{a.link}}">
+                          </div>
+                      {% else %}
+                          <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
+                      {% endif %}
+                      <h5 class="card-title">{{ a.Title }}</h5>
+                      <p class="card-text">{{ a.Description }}</p>
+                      <p class="card-text">{{a.Categorization}}</p>
+                      <a href="{{a.link}}">Go to the video</a>
+                      </div>
+                      </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<br>
+<section>
+    <h5>physiology Section</h5>
+    <ul class="thumbnails">
+        <li class="span4">
+            <div class="thumbnail">
+                <div class="row">
+                    {% for a in physiology %}
+                      <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
+                      <div class="card bg-dark text-white" style="width: 18rem;">
+                      {%if "embed" in a.link %}
+                          <div class="flex-video widescreen ">
+                            <embed width="269" height="150"
+                                   src="{{a.link}}">
+                          </div>
+                      {% else %}
+                          <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
+                      {% endif %}
+                      <h5 class="card-title">{{ a.Title }}</h5>
+                      <p class="card-text">{{ a.Description }}</p>
+                      <p class="card-text">{{a.Categorization}}</p>
+                      <a href="{{a.link}}">Go to the video</a>
+                      </div>
+                      </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
 <br>
     <a href="{% url 'mainapp:upload_video'%}" class="btn w3-circle btn-danger" role="button" style="float: right;">+</a>
 <br>
 <br>
-
 {% endblock %}

@@ -14,10 +14,13 @@ def home(request):
 #youtube function
 
 def youtube(request):
+    biology =Youtube.objects.filter(Categorization='B')
+    microbiology =Youtube.objects.filter(Categorization='M')
+    physiology =Youtube.objects.filter(Categorization='P')
 
-    youtube_videos = Youtube.objects.all()
-    youtube = get_object_or_404
-    return render(request, 'youtube.html', {'youtube_videos': youtube_videos})
+    return render(request, 'youtube.html', {'biology': biology,
+                                             'microbiology':microbiology ,
+                                             'physiology':physiology})
 
 #youtube form function
 

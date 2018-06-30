@@ -5,3 +5,8 @@ from django.contrib import admin
 
 # Register your models here.
 
+from models import Youtube, telegram_model
+
+
+admin.site.register(Youtube)
+admin.site.register(telegram_model)
