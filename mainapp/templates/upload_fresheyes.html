@@ -1,0 +1,20 @@
+{% extends 'index.html' %} {% load bootstrap4 %}
+
+{% block title%}upload file{% endblock %}
+
+{% block content%}
+
+
+
+<form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:upload_fresheyes' %}" method="post">
+
+    {% csrf_token %}
+    {% bootstrap_form form %}
+{% buttons %}
+        <button type="submit" class="btn btn-primary">
+             أرسل
+        </button>
+        {% endbuttons %}
+
+</form>
+{% endblock %}

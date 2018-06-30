@@ -3,10 +3,9 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-# Register your models here.
+from models import Youtube, telegram_model ,fresheyes_model
 
-from models import Youtube, telegram_model
-
-
+#registering
 admin.site.register(Youtube)
 admin.site.register(telegram_model)
+admin.site.register(fresheyes_model)
