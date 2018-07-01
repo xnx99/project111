@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 
 
 Categorization_choices = (
+    ('','--'),
     ('B', u'biology'),
     ('M', u'microbiology'),
     ('P', u'physiology'),
@@ -54,3 +55,25 @@ class fresheyes_model(models.Model):
 
 
 
+# study group
+
+class Article(models.Model):
+    author = models.CharField(max_length=80)
+    title = models.CharField(max_length=200, default='First Title')
+    body = models.TextField(max_length=500)
+    pub_date = models.DateTimeField('تاريخ النشر',auto_now_add=True)
+    is_deleted= models.BooleanField(verbose_name="هل الموضوع محذوف؟",default=False)
+
+    class Meta:
+        verbose_name='مقالة'
+        verbose_name_plural='مقالات'
+
+    def __unicode__(self):
+        return self.title
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article)
+    author = models.CharField(max_length=80)
+    text = models.TextField(max_length=250)
+    pub_date = models.DateTimeField(auto_now_add=True)

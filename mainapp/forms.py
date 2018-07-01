@@ -21,3 +21,10 @@ class fresheyesForm(forms.ModelForm):
         model = fresheyes_model
         fields= ['Title', 'Description','Categorization',
                  'file']
+
+
+class studygroupForm(forms.ModelForm):
+    class Meta:
+        model = fresheyes_model
+        fields= ['Title', 'Description','Categorization',
+                 'file']

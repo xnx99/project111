@@ -21,7 +21,7 @@ def youtube(request):
     physiology =Youtube.objects.filter(Categorization='P')
 
     return render(request, 'youtube.html', {'biology': biology,
-                                             'microbiology':microbiology ,
+                                             'microbiology':microbiology,
                                              'physiology':physiology})
 
 def Youtubefunction(request):
@@ -47,7 +47,7 @@ def telegram(request):
     physiology =telegram_model.objects.filter(Categorization='P')
 
     return render(request, 'telegram.html', {'biology': biology,
-                                             'microbiology':microbiology ,
+                                             'microbiology':microbiology,
                                              'physiology':physiology})
 
 def telegramfunction(request):
@@ -72,12 +72,8 @@ def fresh_eyes (request):
     physiology =fresheyes_model.objects.filter(Categorization='P')
 
     return render(request, 'fresheyes.html', {'biology': biology,
-                                             'microbiology':microbiology ,
+                                             'microbiology':microbiology,
                                              'physiology':physiology})
-
-
-
-
 
 def fresheyesfunction (request):
     # if request.method == 'POST':
@@ -100,7 +96,23 @@ def fresheyesfunction (request):
 
 def handle_uploaded_file(f):
     filename = fresheyes_model.Title  # get the name here
-    destination = open('media/'+filename, 'wb+')
+    destination = open('upload_fresheyes/'+filename, 'wb+')
     for chunk in f.chunks():
         destination.write(chunk)
     destination.close()
+
+
+# def upload(request):
+#     if request.method == 'POST':
+#         handle_uploaded_file(request.FILES['RemoteFile'], str(request.FILES['RemoteFile']))
+#         return HttpResponse("Successful")
+#
+#     return HttpResponse("Failed")
+#
+# def handle_uploaded_file(file, filename):
+#     if not os.path.exists('upload/'):
+#         os.mkdir('upload/')
+#
+#     with open('upload/' + filename, 'wb+') as destination:
+#         for chunk in file.chunks():
+#             destination.write(chunk)
