@@ -16,11 +16,17 @@ Including another URLconf
 from django.conf.urls import url , include
 from django.contrib import admin
 from mainapp.views import home
+from userena import views as userena_views
+
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^mainapp/', include('mainapp.urls')),
-    url(r'^$',home),
+    url(r'^mainapp/', include('mainapp.urls', namespace="mainapp")),
+    url(r'^$',home,name='home' ),
     url(r'^accounts/', include('userena.urls')),
+    url(r'^signup/$',userena_views.signup,name='userena_signup'),
+    url(r'^signin/$',userena_views.signin,name='userena_signin'),
+    url(r'^signout/$',userena_views.signout,name='userena_signout'),
+
 ]

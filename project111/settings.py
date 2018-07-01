@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'guardian',
     'easy_thumbnails',
     'accounts',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -135,7 +136,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_PROFILE_MODULE = 'accounts.MyProfile'
+AUTH_PROFILE_MODULE = 'accounts.CommonProfile'
 ANONYMOUS_USER_ID = -1
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
@@ -150,3 +151,5 @@ LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+SITE_ID = 1
