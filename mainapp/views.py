@@ -88,18 +88,18 @@ def fresheyesfunction (request):
     if request.method == 'POST':
         form = fresheyesForm(request.POST, request.FILES) #the diffrence here is the type of request
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect(reverse('mainapp:fresheyes'))
+            form.save()
+            return HttpResponseRedirect(reverse('mainapp:fresh_eyes'))
     else:
         form = fresheyesForm()
     return render(request, "upload_fresheyes.html", {'form': form})
 
-def handle_uploaded_file(f):
-    filename = fresheyes_model.Title  # get the name here
-    destination = open('upload_fresheyes/'+filename, 'wb+')
-    for chunk in f.chunks():
-        destination.write(chunk)
-    destination.close()
+# def handle_uploaded_file(f):
+#     filename = fresheyes_model.Title  # get the name here
+#     destination = open('upload_fresheyes/'+filename, 'wb+')
+#     for chunk in f.chunks():
+#         destination.write(chunk)
+#     destination.close()
 
 
 # def upload(request):
@@ -116,3 +116,9 @@ def handle_uploaded_file(f):
 #     with open('upload/' + filename, 'wb+') as destination:
 #         for chunk in file.chunks():
 #             destination.write(chunk)
+
+#study group functions
+
+def study_group(request):
+    return render(request, "study_group.html")#response
+

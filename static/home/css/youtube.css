@@ -27,6 +27,7 @@
 
  and (device-width: 800px), only screen and (max-width: 767px) {
 
- .flex-video { padding-top: 0; }
+.flex-video { padding-top: 0; }
    }
+
 

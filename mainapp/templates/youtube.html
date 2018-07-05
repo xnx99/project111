@@ -3,9 +3,26 @@
 
 
 {% block content %}
-
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+<link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' %}" rel="stylesheet" type="text/css">
+<link href=' https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+<link href="{% static 'css/youtube.css' %}" rel="stylesheet">
+<style>
+.align-items-stretch{
+    margin-bottom: 10px
+}
+.custom-card:hover {
+  color: inherit;
+}
+.thumbnails{
+    background-image: url("https://static1.squarespace.com/static/50c2031de4b02a7395e3e36f/t/542db21ee4b0d845f517528a/1412280869359/Biology+Header.jpg?format=1500w");
+    background-repeat: no-repeat, repeat;
+}
+</style>
 <br>
     <meta charset="UTF-8">
         <h5 class="mt-0">{{ video.Title }}</h5>
@@ -13,12 +30,13 @@
 <section>
     <h5>Biology Section</h5>
     <ul class="thumbnails">
-        <li class="span4">
+        <div class="span4" >
             <div class="thumbnail">
                 <div class="row">
                     {% for a in biology %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                          <div class="card bg-dark text-white" style="width: 18rem;">
+                          <a href="{{a.link}}" class="custom-card">
+                          <div class="card bg-dark text-white h-100" style="width: 18rem;" >
                           {%if "embed" in a.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
@@ -30,25 +48,26 @@
                           <h5 class="card-title">{{ a.Title }}</h5>
                           <p class="card-text">{{ a.Description }}</p>
                           <p class="card-text">{{a.Categorization}}</p>
-                          <a href="{{a.link}}">Go to the video</a>
                           </div>
+                          </a>
                           </div>
                     {% endfor %}
                 </div>
             </div>
-        </li>
+        </div>
     </ul>
 </section>
 <br>
 <section>
-    <h5>microbiology Section</h5>
+    <h5>Microbiology Section</h5>
     <ul class="thumbnails">
-        <li class="span4">
+        <div class="span4" >
             <div class="thumbnail">
                 <div class="row">
                     {% for a in microbiology %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                          <div class="card bg-dark text-white" style="width: 18rem;">
+                          <a href="{{a.link}}" class="custom-card">
+                          <div class="card bg-dark text-white h-100" style="width: 18rem;" >
                           {%if "embed" in a.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
@@ -60,25 +79,26 @@
                           <h5 class="card-title">{{ a.Title }}</h5>
                           <p class="card-text">{{ a.Description }}</p>
                           <p class="card-text">{{a.Categorization}}</p>
-                          <a href="{{a.link}}">Go to the video</a>
                           </div>
+                          </a>
                           </div>
                     {% endfor %}
                 </div>
             </div>
-        </li>
+        </div>
     </ul>
 </section>
 <br>
 <section>
-    <h5>physiology Section</h5>
+    <h5>Physiology Section</h5>
     <ul class="thumbnails">
-        <li class="span4">
+        <div class="span4" >
             <div class="thumbnail">
                 <div class="row">
                     {% for a in physiology %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                          <div class="card bg-dark text-white" style="width: 18rem;">
+                          <a href="{{a.link}}" class="custom-card">
+                          <div class="card bg-dark text-white h-100" style="width: 18rem;" >
                           {%if "embed" in a.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
@@ -90,13 +110,13 @@
                           <h5 class="card-title">{{ a.Title }}</h5>
                           <p class="card-text">{{ a.Description }}</p>
                           <p class="card-text">{{a.Categorization}}</p>
-                          <a href="{{a.link}}">Go to the video</a>
                           </div>
+                          </a>
                           </div>
                     {% endfor %}
                 </div>
             </div>
-        </li>
+        </div>
     </ul>
 </section>
 <br>
