@@ -120,5 +120,5 @@ def fresheyesfunction (request):
 #study group functions
 
 def study_group(request):
-    return render(request, "study_group.html")#response
+    return render(request, "studygroup.html")#response
 
