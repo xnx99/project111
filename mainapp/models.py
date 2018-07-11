@@ -40,25 +40,25 @@ class telegram_model(models.Model):
 
 #Fresh eyes models
 
-class fresheyes_model(models.Model):
+class fresheyes_post(models.Model):
     Title=models.TextField(max_length=75)
     uploadedby=models.ForeignKey(User ,null=True)
-    Description=models.TextField(max_length=150)
+    help_type=models.TextField(max_length=150,default=True,verbose_name=u"نوع المساعدة؟")
     Categorization=models.CharField(max_length=1, choices=Categorization_choices)
     Date= models.DateTimeField('date published',auto_now_add=True)
     is_deleted= models.BooleanField(verbose_name="هل المستند محذوف؟",default=False)
-    file= models.FileField()
+    file= models.FileField(upload_to='Fresh_eyes/', null=True, blank=True)
 
 
     def __unicode__(self):
         return unicode(self.file) or u''
 
-# i did not make migrations because i'm still thinking how can i connect them by the ForeignKey
-class fresheyes2_model(models.Model):
-    Title=models.TextField(max_length=75)
-    Description=models.TextField(max_length=150)
+
+class fresheyes_comment(models.Model):
+    post=models.ForeignKey(fresheyes_post)
+    text=models.TextField(max_length=150)
     is_deleted= models.BooleanField(verbose_name="هل المستند محذوف؟",default=False)
-    file= models.FileField()
+    file= models.FileField(upload_to='Fresh_eyes/comment/', null=True, blank=True)
 
 
     def __unicode__(self):
@@ -77,9 +77,10 @@ class post(models.Model):
     A news post.
     """
     title = models.CharField(max_length=128)
-    author = models.CharField(max_length=128)
+    uploadedby=models.ForeignKey(User ,null=True)
     body = models.TextField()
     image = models.ImageField(null=True, blank=True)
+    Categorization=models.CharField(max_length=1, choices=Categorization_choices)
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name="Publication Date")
 
     def has_image(self):
@@ -103,7 +104,7 @@ class comment(models.Model):
     A comment on a news post.
     """
     post = models.ForeignKey(post)
-    author = models.CharField(max_length=128)
+    uploadedby=models.ForeignKey(User ,null=True)
     body = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
 

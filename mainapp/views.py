@@ -3,11 +3,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from mainapp.forms import YoutubeForm , telegramForm , fresheyesForm
-from mainapp.models  import Youtube , telegram_model , fresheyes_model
-#from .forms import UploadFileForm
-# Imaginary function to handle an uploaded file.
-#from somewhere import handle_uploaded_file
+from mainapp.forms import YoutubeForm , telegramForm , fresheyesForm , postForm, commentForm
+from mainapp.models  import Youtube , telegram_model , fresheyes_post , post ,comment
+
 
 
 def home(request):
@@ -67,9 +65,9 @@ def telegramfunction(request):
 #Fresh eyes functions
 
 def fresh_eyes (request):
-    biology =fresheyes_model.objects.filter(Categorization='B')
-    microbiology =fresheyes_model.objects.filter(Categorization='M')
-    physiology =fresheyes_model.objects.filter(Categorization='P')
+    biology =fresheyes_post.objects.filter(Categorization='B')
+    microbiology =fresheyes_post.objects.filter(Categorization='M')
+    physiology =fresheyes_post.objects.filter(Categorization='P')
 
     return render(request, 'fresheyes.html', {'biology': biology,
                                              'microbiology':microbiology,
@@ -94,6 +92,8 @@ def fresheyesfunction (request):
         form = fresheyesForm()
     return render(request, "upload_fresheyes.html", {'form': form})
 
+#wrong way#
+
 # def handle_uploaded_file(f):
 #     filename = fresheyes_model.Title  # get the name here
 #     destination = open('upload_fresheyes/'+filename, 'wb+')
@@ -117,8 +117,42 @@ def fresheyesfunction (request):
 #         for chunk in file.chunks():
 #             destination.write(chunk)
 
+#end of wrong way#
+
 #study group functions
 
 def study_group(request):
-    return render(request, "studygroup.html")#response
 
+    biology =post.objects.filter(Categorization='B')
+    microbiology =post.objects.filter(Categorization='M')
+    physiology =post.objects.filter(Categorization='P')
+
+    return render(request, 'studygroup.html', {'biology': biology,
+                                             'microbiology':microbiology,
+                                             'physiology':physiology})
+
+def studygroup_postForm(request):
+    if request.method == 'POST':
+        post_Form = postForm(request.POST)
+        if post_Form.is_valid():
+            post_Form.save()
+            return HttpResponseRedirect(reverse('mainapp:study_group'))
+
+    elif request.method == 'GET':
+
+        form = postForm()
+
+    return render(request, "upload_post.html", {'form': form})
+
+def studygroup_commentForm(request):
+    if request.method == 'POST':
+        comment_Form = commentForm(request.POST)
+        if comment_Form.is_valid():
+            comment_Form.save()
+            return HttpResponseRedirect(reverse('mainapp:studygroup'))
+
+    elif request.method == 'GET':
+
+        form = commentForm()
+
+    return render(request, "upload_comment.html", {'form': form})
