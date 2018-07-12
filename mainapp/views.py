@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from mainapp.forms import YoutubeForm , telegramForm , fresheyesForm , postForm, commentForm
 from mainapp.models  import Youtube , telegram_model , fresheyes_post , post ,comment
@@ -127,9 +127,22 @@ def study_group(request):
     microbiology =post.objects.filter(Categorization='M')
     physiology =post.objects.filter(Categorization='P')
 
-    return render(request, 'studygroup.html', {'biology': biology,
-                                             'microbiology':microbiology,
-                                             'physiology':physiology})
+    if request.method == 'POST':
+        form = commentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mainapp:studygroup'))
+
+    elif request.method == 'GET':
+
+        form = commentForm()
+
+    context={'biology':biology,
+             'microbiology':microbiology,
+             'physiology':physiology}
+
+    context['form']=form
+    return render(request, 'studygroup.html',context)
 
 def studygroup_postForm(request):
     if request.method == 'POST':
@@ -156,3 +169,44 @@ def studygroup_commentForm(request):
         form = commentForm()
 
     return render(request, "upload_comment.html", {'form': form})
+
+#trying to be cool
+def list_posts(request,pk, selector=None):
+    # category = post.objects.get_from_slugs_or_404(slugs)
+    post = get_object_or_404(post, pk=pk)
+    #exam = get_object_or_404(Exam.objects.select_related('category'), pk=pk, category=category)
+    post_pk= get_object_or_404(post.objects.select_related('post'), pk=pk, post=post)
+    # assignment_form = forms.AssignQuestionForm(exam=exam) << i do not know how to apply it
+    # # PERMISSION CHECK
+    # if not exam.can_user_access(request.user):
+    #     raise PermissionDenied
+
+    context = {'Issue': Issue,
+               'selector':selector
+               #form is missing
+               #is deleted button is missing
+               }
+
+    if selector:
+        if selector.startswith('i-'):
+            issue_pk = int(selector[2:])
+            issue = get_object_or_404(Issue, pk=issue_pk)
+            context['list_name'] = issue.name #what is list name?
+            elif selector.startswith('s-'):
+                pk_post = int(selector[2:])
+                subject = get_object_or_404(post_pk.subject_set, pk=pk_post)
+                context['list_name'] = subject.name #what is list name?
+            if selector == 'all':
+                context['all'] = post_pk.objects.all
+            elif selector == 'biology':
+                context['biology']=post_pk.objects.filter(Categorization='B')
+            elif selector == 'microbiology':
+                context['microbiology']=post_pk.objects.filter(Categorization='M')
+            elif selector == 'physiology':
+                context['physiology']=post_pk.objects.filter(Categorization='P')
+            else:
+                raise Http404
+            return render(request, 'studygroup.html', context)
+        else: #if no selector
+            context['issues'] = Issue.objects.all()
+            return render(request, 'studygroup.html', context)

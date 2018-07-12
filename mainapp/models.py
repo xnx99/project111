@@ -110,3 +110,22 @@ class comment(models.Model):
 
     def __unicode__(self):
         return "Comment by %s on post '%s'" % (self.author, self.post.title)
+
+#for issue selector
+
+class Issue(models.Model):
+    name = models.CharField(max_length=100)
+    # code_name is something more stable than 'name'
+    code_name = models.CharField(max_length=50)
+    is_blocker = models.BooleanField(default=False)
+
+    def get_selector(self):
+        return 'i-' + str(self.pk)
+
+    def __str__(self):
+        if self.is_blocker:
+            blocker_str = "blocker"
+        else:
+            blocker_str = "non-blocker"
+
+        return "{} ({})".format(self.name, blocker_str)
