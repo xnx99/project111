@@ -83,6 +83,13 @@
             <br>-Nelson Mandela</p>
           </div>
         </div>
+          <!--here i used Font Awesome4 not 5-->
+          <a href="{% url 'userena_signin' %}" class="btn btn-circle js-scroll-trigger [icon]='faCoffee'">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          </a>
+          <a href="{% url 'userena_signup' %}" class="btn btn-circle js-scroll-trigger">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </a>
       </div>
     </section>
 
@@ -153,7 +160,7 @@
                             <br>
                         </p3>
                           <br>
-                        <a href="{% url 'mainapp:study_group' %}" class="btn btn-primary">اذهب الان</a>
+                        <a href="{% url 'mainapp:list_posts' %}" class="btn btn-primary">اذهب الان</a>
                       </div>
                    </div>
                </div>

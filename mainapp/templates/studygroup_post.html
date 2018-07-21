@@ -1,5 +1,10 @@
 {% extends 'index.html' %} {% load static %} {% load bootstrap4 %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/toastr.min.css' %}">
+
+{% endblock %}
 {% block title%}Study group {% endblock %}
+
 
 
     <meta charset="utf-8">
@@ -8,41 +13,42 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/blog-post.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
 
 
 {% block content %}
   <br>
-  {% for a in biology %}
     <!-- Page Content -->
     <div class="container">
       <div class="row">
         <!-- Post Content Column -->
         <div class="col-lg-8">
           <!-- Title -->
-          <h1 class="mt-4">{{ a.title }}</h1>
-          <!-- Author -->
-          <!--<p class="lead">-->
-            <!--by-->
-            <!--a.uploadedby-->
-          <!--</p>-->
-          <hr>
-          <!-- Date/Time -->
-          <p>{{a.pub_date}}</p>
+          <h1 class="mt-4">{{ article.title }}</h1>
           <hr>
           <!-- Preview Image -->
-          <img class="img-fluid rounded" src="a.image" alt="">
-          <hr>
+          <!--FIX:if condtion -->
+          <img class="img-fluid rounded" src="{{ article.image }}" alt="">
           <!-- Post Content -->
-          <p>{{a.body}}</p>
-
-
+          <p>{{article.body}}</p>
           <hr>
-          <!-- Comments Form -->
+          Author
+          <p class="lead">
+            by
+            {{ article.uploadedby }}
+              {% if article.is_deleted == False %}
+             <button id="delete"  data-url="{% url 'mainapp:delete_article' article.pk %}" data-article-pk='{{ article.pk }}'> DELETE </button>
+              {% endif  %}
+          </p>
+          <!-- Date/Time -->
+          <p>{{article.pub_date}}</p>
+
+<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+          <hr>
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
-
-          <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:upload_comment' %}" method="post">
+          <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:show_post' article.pk %}" method="post">
 
               {% csrf_token %}
               {% bootstrap_form form %}
@@ -55,49 +61,42 @@
             </div>
           </div>
 
-          <!-- Single Comment -->
+          {% for comment in comment1 %}
+
+          <blockquote>
+
           <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <img class="d-flex mr-3 rounded-circle" src="list_images" alt="">
             <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-          </div>
+              <h5 class="mt-0">{{ comment.uploadedby}}</h5>
+              <p> {{ comment.body }}</p>
 
-          <!-- Comment with nested comments -->
+              {% for child_comment in comment.children %}
+              <blockquote>
+              <p>{{ child_comment.content }}</p>
+              <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
+              </blockquote>
+              {% endfor %}
 
 
+              <form method="POST" action="."> {% csrf_token %}
+                <input type='hidden' name='parent_id' value='{{ comment.id }}'>
+                <input style="float:right" type='submit' value='Reply' class='btn btn-default'>
+              </form>
 
-              <br>
-    <br>
-
-    <br>
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-              <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                  <h5 class="mt-0">Commenter Name</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-              </div>
-
-              <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                  <h5 class="mt-0">Commenter Name</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-              </div>
 
             </div>
           </div>
 
+          </blockquote>
+
+          <hr/>
+
+          {% endfor %}
         </div>
+      </div>
+    </div>
+
 
 
         <!-- Sidebar Widgets Column -->
@@ -115,7 +114,7 @@
               </div>
             </div>
           </div>
-
+url(r'studygroup/(?P<selector>[\-\d\w_]+)/$', views.list_posts, name='list_posts'),
           <!-- Categories Widget -->
           <div class="card my-4">
             <h5 class="card-header">Categories</h5>
@@ -165,12 +164,34 @@
       <!-- /.row -->
 
     </div>
-{% endfor %}
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
+{% endblock %}
+{% block javascript %}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+             $('#delete').click(function(){
+                      console.log('hi')
+                      article_pk = $(this).data('article-pk');
+                      url = "{% url 'mainapp:delete_article' article.pk %}"
+                      $.ajax({
+                          url: url,
+                          type: 'POST',
+                          success: function(data){
+                            if (data.message == 'success'){
+                                window.location.href = "{% url 'mainapp:list_posts' %}";
+                              <!--toastr.success("Your article was removed.")-->
+                            } else {
+                            }
+                          }
+                      });
+             });
+    });
+
+</script>
 </html>
 
 {% endblock%}

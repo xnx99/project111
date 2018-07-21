@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> {% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -8,12 +8,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-    <title>{% block title %}Hello, world!{% endblock %}</title>
-  </head>
+      <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+{% block head %}
+{% endblock %}
+    <title>{% block title %}wow{% endblock %}</title>
+  </head>
   <body>
+  <!--333333here edit the navbar333333-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="{% url 'mainapp:home' %}">ناصية الحلم</a>
+  <a class="navbar-brand" href="{% url 'mainapp:home' %}"" >ناصية الحلم</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -21,27 +27,38 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'mainapp:home' %}">الرئيسية <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'home' %}">الرئيسية <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           التطبيقات
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'mainapp:youtube'%}">Youtube</a>
+          <a class="dropdown-item" href="{% url 'mainapp:youtube' %}">Youtube</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'mainapp:telegram'%}">Telegram</a>
+          <a class="dropdown-item" href="{% url 'mainapp:telegram' %}">Telegram</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Study Group</a>
+          <a class="dropdown-item" href="{% url 'mainapp:list_posts' %}">Study Group</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Fresh Eyes</a>
+          <a class="dropdown-item" href="{% url 'mainapp:fresh_eyes' %}">Fresh Eyes</a>
         </div>
       </li>
-      <!--<li class="nav-item">-->
-        <!--<a class="nav-link" href="#">#</a>-->
-      <!--</li>-->
-        <!---->
     </ul>
+
+        <div class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link">
+        <span class="avatar avatar-online">
+        <img src="{% static 'img/pikachu.png' %}" alt="avatar">
+
+        <!--i have replace userena_profile_edit and userena_signout with # sign because i did not make the templates yet-->
+        </span>
+        <span class="user-name">{{ user.profile.first_name|default:user.username }}</span></a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a href="#" class="dropdown-item"><i class="ft-user"></i> Edit Profile
+            </a>
+        <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item"><i class="ft-power"></i> Logout</a>
+        </div></div>
+
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="ابحث في ناصية الحلم!" aria-label="Search">
       <button class="btn btn-light my-2 my-sm-0" type="submit">!ابحث</button>
@@ -49,68 +66,13 @@
   </div>
 </nav>
 <br/>
+<br>
+<br>
 <div class="container">
+
    {% block content %}
    {% endblock %}
 </div>
-
-    <!--$('body').append('<div id="toTop" class="btn back-top"><span class="ti-arrow-up"></span></div>');-->
-    <!--$(window).on("scroll", function () {-->
-        <!--if ($(this).scrollTop() !== 0) {-->
-            <!--$('#toTop').fadeIn();-->
-        <!--} else {-->
-            <!--$('#toTop').fadeOut();-->
-        <!--}-->
-    <!--});-->
-    <!--$('#toTop').on("click", function () {-->
-        <!--$("html, body").animate({scrollTop: 0}, 600);-->
-        <!--return false;-->
-    <!--});-->
-
-    <!--//lobipanel-->
-    <!--$('.lobidrag').lobiPanel({-->
-        <!--sortable: true,-->
-        <!--editTitle: {-->
-            <!--icon: 'ti-pencil'-->
-        <!--},-->
-        <!--unpin: {-->
-            <!--icon: 'ti-move'-->
-        <!--},-->
-        <!--reload: {-->
-            <!--icon: 'ti-reload'-->
-        <!--},-->
-        <!--minimize: {-->
-            <!--icon: 'ti-minus',-->
-            <!--icon2: 'ti-plus'-->
-        <!--},-->
-        <!--close: {-->
-            <!--icon: 'ti-close'-->
-        <!--},-->
-        <!--expand: {-->
-            <!--icon: 'ti-fullscreen',-->
-            <!--icon2: 'ti-fullscreen'-->
-        <!--}-->
-    <!--});-->
-
-    <!--$('.lobidisable').lobiPanel({-->
-        <!--reload: false,-->
-        <!--close: false,-->
-        <!--editTitle: false,-->
-        <!--sortable: true,-->
-        <!--unpin: {-->
-            <!--icon: 'ti-move'-->
-        <!--},-->
-        <!--minimize: {-->
-            <!--icon: 'ti-minus',-->
-            <!--icon2: 'ti-plus'-->
-        <!--},-->
-        <!--expand: {-->
-            <!--icon: 'ti-fullscreen',-->
-            <!--icon2: 'ti-fullscreen'-->
-        <!--}-->
-    <!--});-->
-<!--});-->
-
 <!--#the old footer-->
     <!--<footer>-->
       <!--<div class="container text-center">-->
@@ -137,7 +99,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
   </body>
+{% block javascript %}
+{% endblock %}
 </html>
-
-

@@ -15,19 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import url , include
 from django.contrib import admin
-from mainapp.views import home
+from mainapp.views import authentication
 from accounts import views
-
-
+from . import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^mainapp/', include('mainapp.urls', namespace="mainapp")),
-    url(r'^$',home,name='home' ),
+    url(r'^$',authentication,name='home' ),
     url(r'^accounts/', include('userena.urls')),
-    url(r'^signup/$',views.signup,{'template_name': 'userena/signup.html'},name='signup'),
-    # url(r'^signin/$',userena_views.signin,name='userena_signin'),
-    # url(r'^signout/$',userena_views.signout,name='userena_signout'),
 
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

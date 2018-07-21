@@ -210,6 +210,7 @@ a:focus, a:hover {
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
   border-radius: 0;
+
 }
 
 .btn-default {
@@ -217,6 +218,8 @@ a:focus, a:hover {
   border: 1px solid #42DCA3;
   background-color: transparent;
 }
+
+
 
 .btn-default:focus, .btn-default:hover {
   color: black;

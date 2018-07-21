@@ -34,14 +34,20 @@ class fresheyes_commentForm(forms.ModelForm):
 class postForm(forms.ModelForm):
      class Meta:
          model = post
-         fields= ['title','body','Categorization',
-                  'image']
+         fields= ['title','Description','body','image',
+                  'Categorization']
 
 
 class commentForm(forms.ModelForm):
      class Meta:
          model = comment
          fields= ['body']
+
+
+# class replyForm(forms.ModelForm):
+#      class Meta:
+#          model = comment
+#          fields= ['parent']
 
 
 #<<ask about the fields needed for the comment>>

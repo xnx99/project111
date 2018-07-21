@@ -78,10 +78,13 @@ class post(models.Model):
     """
     title = models.CharField(max_length=128)
     uploadedby=models.ForeignKey(User ,null=True)
+    Description=models.TextField(max_length=150)
     body = models.TextField()
     image = models.ImageField(null=True, blank=True)
     Categorization=models.CharField(max_length=1, choices=Categorization_choices)
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name="Publication Date")
+    is_deleted= models.BooleanField(verbose_name="هل المقال محذوف؟",default=False)
+
 
     def has_image(self):
         return self.image != ""
@@ -98,6 +101,8 @@ class post(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("posts:detail")
 
 class comment(models.Model):
     """
@@ -107,25 +112,36 @@ class comment(models.Model):
     uploadedby=models.ForeignKey(User ,null=True)
     body = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies')
+    is_deleted= models.BooleanField(verbose_name="هل التعليق محذوف؟",default=False)
 
     def __unicode__(self):
         return "Comment by %s on post '%s'" % (self.author, self.post.title)
 
+    def children(self): #replies
+         return comment.objects.filter(parent=self)
+
+    @property
+    def is_parent(self):
+        if self.parent is not None:
+            return False
+        return True
+
 #for issue selector
 
-class Issue(models.Model):
-    name = models.CharField(max_length=100)
-    # code_name is something more stable than 'name'
-    code_name = models.CharField(max_length=50)
-    is_blocker = models.BooleanField(default=False)
-
-    def get_selector(self):
-        return 'i-' + str(self.pk)
-
-    def __str__(self):
-        if self.is_blocker:
-            blocker_str = "blocker"
-        else:
-            blocker_str = "non-blocker"
-
-        return "{} ({})".format(self.name, blocker_str)
+# class Issue(models.Model):
+#     name = models.CharField(max_length=100)
+#     # code_name is something more stable than 'name'
+#     code_name = models.CharField(max_length=50)
+#     is_blocker = models.BooleanField(default=False)
+#
+#     def get_selector(self):
+#         return 'i-' + str(self.pk)
+#
+#     def __str__(self):
+#         if self.is_blocker:
+#             blocker_str = "blocker"
+#         else:
+#             blocker_str = "non-blocker"
+#
+#         return "{} ({})".format(self.name, blocker_str)

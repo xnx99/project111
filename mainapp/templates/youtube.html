@@ -9,26 +9,120 @@
 <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 <link href="{% static 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' %}" rel="stylesheet" type="text/css">
 <link href=' https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Merriweather:700" rel="stylesheet">
     <!-- Custom styles for this template -->
 <link href="{% static 'css/youtube.css' %}" rel="stylesheet">
+
+<script type="text/javascript">
+        $("#Categorization").prop("disabled", true);
+</script>
+
+
 <style>
+<!--body{-->
+<!--background-color: #D3D3D3 ;-->
+<!--}-->
 .align-items-stretch{
-    margin-bottom: 10px
+    margin-bottom: 10px ;
 }
 .custom-card:hover {
   color: inherit;
 }
-.thumbnails{
-    background-image: url("https://static1.squarespace.com/static/50c2031de4b02a7395e3e36f/t/542db21ee4b0d845f517528a/1412280869359/Biology+Header.jpg?format=1500w");
+
+.image_biology{
+    background-image: url("https://cdn4.vectorstock.com/i/1000x1000/64/63/biology-sketches-on-school-board-vector-11166463.jpg");
     background-repeat: no-repeat, repeat;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+ }
+.image_microbiology{
+    background-image: url("https://previews.123rf.com/images/seamartini/seamartini1503/seamartini150300523/37827312-amebas-bacteria-or-microbial-lifeforms-seamless-pattern-for-science-or-medicine-design.jpg");
+    background-repeat: no-repeat, repeat;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+ }
+.image_physiology{
+    background-image: url("https://st2.depositphotos.com/2824873/11304/v/950/depositphotos_113045900-stock-illustration-biological-vector-background.jpg");
+    background-repeat: no-repeat, repeat;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    }
+
+.card-title{
+font-size: 150%;
+text-align: center;
+ }
+
+.card-text{
+font-size: large;
+text-align: center;
+}
+.card-text2{
+font-size: 15px;
+text-align: center;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 6px;
+  background-color: #f70202;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 15px;
+  width: 135px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 2.5px;
+  float: right;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.h-100{
+width: 18rem;
+opacity: 0.9;
+border: 5px solid black;
+border-radius: 5px;
 }
 </style>
-<br>
+
     <meta charset="UTF-8">
         <h5 class="mt-0">{{ video.Title }}</h5>
 <br>
-<section>
-    <h5>Biology Section</h5>
+
+    <br>
+    <h3 style="font-family: 'Lobster Two', cursive;
+                color: black;">
+        Biology Section</h3>
+    <section class="image_biology">
+    <br>
     <ul class="thumbnails">
         <div class="span4" >
             <div class="thumbnail">
@@ -36,7 +130,7 @@
                     {% for a in biology %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
                           <a href="{{a.link}}" class="custom-card">
-                          <div class="card bg-dark text-white h-100" style="width: 18rem;" >
+                          <div class="card bg-info text-white h-100" style="border: 5px solid black;border-radius: 5px;" >
                           {%if "embed" in a.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
@@ -46,8 +140,9 @@
                               <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
                           {% endif %}
                           <h5 class="card-title">{{ a.Title }}</h5>
+                          <hr>
                           <p class="card-text">{{ a.Description }}</p>
-                          <p class="card-text">{{a.Categorization}}</p>
+                          <p class="card-text2 ">{{a.Categorization}}</p>
                           </div>
                           </a>
                           </div>
@@ -59,7 +154,12 @@
 </section>
 <br>
 <section>
-    <h5>Microbiology Section</h5>
+
+    <h3 style="font-family: 'Lobster Two', cursive;
+                color: red;">
+        Microbiology Section</h3>
+    <section class="image_microbiology">
+    <br>
     <ul class="thumbnails">
         <div class="span4" >
             <div class="thumbnail">
@@ -67,7 +167,7 @@
                     {% for a in microbiology %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
                           <a href="{{a.link}}" class="custom-card">
-                          <div class="card bg-dark text-white h-100" style="width: 18rem;" >
+                          <div class="card bg-dark text-white h-100">
                           {%if "embed" in a.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
@@ -77,8 +177,9 @@
                               <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
                           {% endif %}
                           <h5 class="card-title">{{ a.Title }}</h5>
+                          <hr>
                           <p class="card-text">{{ a.Description }}</p>
-                          <p class="card-text">{{a.Categorization}}</p>
+                          <p class="card-text2">{{a.Categorization}}</p>
                           </div>
                           </a>
                           </div>
@@ -90,7 +191,11 @@
 </section>
 <br>
 <section>
-    <h5>Physiology Section</h5>
+    <h3 style="font-family: 'Lobster Two', cursive;
+                color: green;">
+        Physiology Section</h3>
+    <section class="image_physiology">
+    <br>
     <ul class="thumbnails">
         <div class="span4" >
             <div class="thumbnail">
@@ -98,7 +203,7 @@
                     {% for a in physiology %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
                           <a href="{{a.link}}" class="custom-card">
-                          <div class="card bg-dark text-white h-100" style="width: 18rem;" >
+                          <div class="card bg-warning text-white h-100" style="#" >
                           {%if "embed" in a.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
@@ -108,8 +213,9 @@
                               <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
                           {% endif %}
                           <h5 class="card-title">{{ a.Title }}</h5>
+                          <hr>
                           <p class="card-text">{{ a.Description }}</p>
-                          <p class="card-text">{{a.Categorization}}</p>
+                          <p class="card-text2">{{a.Categorization}}</p>
                           </div>
                           </a>
                           </div>
@@ -120,10 +226,15 @@
     </ul>
 </section>
 <br>
-    <a href="{% url 'mainapp:upload_video'%}" class="btn w3-circle btn-danger" role="button" style="float: right;">+</a>
+    <!--<a href="{% url 'mainapp:upload_video'%}" class="btn w3-circle btn-danger" role="button" style="float: right;">+</a>-->
+<!--<br>-->
+<!--<br>-->
+<button class="button" style="vertical-align:middle;">
+    <span> <a href="{% url 'mainapp:upload_video'%}">New Video!</a> </span>
+</button>
+</section>
+</section>
 <br>
 <br>
-
+<br>
 {% endblock %}
-
-

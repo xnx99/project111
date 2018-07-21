@@ -4,82 +4,131 @@
 
     <!-- Custom styles for this template -->
 <link href="{% static 'css/telegram.css' %}" rel="stylesheet">
-
+    <!--Custom styles for this Fonts-->
+<link href="https://fonts.googleapis.com/css?family=Coda+Caption:800" rel="stylesheet">
 <br>
 <style>
-.telegram_image1{
-    background-image: url("http://study.com/cimages/course-image/ohio-state-test-biology-practice-study-guide_251151_large.jpg");
-    background-repeat: no-repeat, repeat;
+body {
+    background-color: #D3D3D3;
+    background-image: url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX32046963.jpg");
+    <!--background-repeat: no-repeat, repeat;-->
+    <!--height: 100%;-->
+    <!--background-position: center;-->
+    <!--background-size: cover;-->
 }
-
+<!--.biology_image{-->
+    <!--background-color: black ;-->
+    <!--background-repeat: no-repeat, repeat;-->
+    <!--height: 100%;-->
+    <!--background-position: center;-->
+    <!--background-size: cover;-->
+<!--}-->
+<!--.microbiology_image{-->
+    <!--background-color: black ;-->
+    <!--background-repeat: no-repeat, repeat;-->
+    <!--height: 100%;-->
+    <!--background-position: center;-->
+    <!--background-size: cover;-->
+<!--}-->
+<!--.physiology_image{-->
+    <!--background-color: black ;-->
+    <!--background-repeat: no-repeat, repeat;-->
+    <!--height: 100%;-->
+    <!--background-position: center;-->
+    <!--background-size: cover;-->
+<!--}-->
 .card{
-    margin-bottom: 10px
+    margin-bottom: 20px;
+    background-color: white  ;
+    <!--opacity: 0.9;-->
+
+}
+.card-title{
+font-size: 150%;
+text-align: center;
+ }
+.card-text{
+font-size: large;
+text-align: center;
+}
+.card-text2{
+font-size: 15px;
+text-align: center;
+}
+.btn btn-primary {
+text-align: center;
+}
+.font{
+font-family: 'Coda Caption', sans-serif;
+                 color: red;
+                 background-color: black;
 }
 </style>
-<section class="telegram_image1">
-    <h5>Biology Section</h5>
+    <h3 class="font">Biology Section</h3>
+<section class="biology_image">
+    <br>
     <div class="row">
     {% for a in biology%}
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
         <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{ a.Title }}</h5>
+            <hr>
             <p class="card-text">{{ a.Description }}</p>
-            <a href="{{a.link}}" class="btn btn-primary">Go to the channel</a>
+            <a href="{{a.link}}" class="btn btn-primary">Go to the channel!</a>
           </div>
         </div>
         </div>
     {% endfor %}
     </div>
 </section>
-
 <br>
-
 <section>
-    <h5>microbiology Section</h5>
+    <h3 class="font">microbiology Section</h3>
+<section class="microbiology_image">
+    <br>
     <div class="row">
     {% for a in microbiology%}
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
         <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{ a.Title }}</h5>
+            <hr>
             <p class="card-text">{{ a.Description }}</p>
-            <a href="{{a.link}}" class="btn btn-primary">Go to the channel</a>
+            <a href="{{a.link}}" class="btn btn-primary">Go to the channel!</a>
           </div>
         </div>
         </div>
     {% endfor %}
     </div>
 </section>
-
 <br>
-
 <section>
-    <h5>physiology Section</h5>
+    <h3 class="font">physiology Section</h3>
+<section class="physiology_image">
+    <br>
     <div class="row">
     {% for a in physiology%}
-        <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
         <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{ a.Title }}</h5>
+            <hr>
             <p class="card-text">{{ a.Description }}</p>
-            <a href="{{a.link}}" class="btn btn-primary">Go to the channel</a>
+            <a href="{{a.link}}" class="btn btn-primary">Go to the channel!</a>
           </div>
         </div>
         </div>
-
     {% endfor %}
     </div>
 </section>
-
 <br>
     <a href="{% url 'mainapp:upload_telegram'%}" class="btn w3-circle btn-primary" role="button" style="float: right;">+</a>
 <br>
 <br>
-
 {% endblock%}
 
 

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -146,10 +148,17 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'yourgmailaccount@gmail.com'
 EMAIL_HOST_PASSWORD = 'yourgmailpassword'
 
-USERENA_SIGNIN_REDIRECT_URL = '/accounts/%(username)s/'
-LOGIN_URL = '/accounts/signin/'
-LOGOUT_URL = '/accounts/signout/'
-
+LOGIN_URL = 'accounts/signin'
+LOGOUT_URL = reverse_lazy('loginas-logout')
+LOGINAS_LOGOUT_REDIRECT_URL = reverse_lazy('index')
+LOGIN_REDIRECT_URL = USERENA_SIGNIN_REDIRECT_URL = reverse_lazy('index')
+LOGOUT_REDIRECT_URL = USERENA_REDIRECT_ON_SIGNOUT = reverse_lazy('index')
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 SITE_ID = 1
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
+
+RANDOM_IMAGES = '%s/fallback_images/' % MEDIA_ROOT
+
