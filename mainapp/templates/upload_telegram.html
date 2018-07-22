@@ -3,7 +3,7 @@
  {% block title%}upload telegram channels{% endblock %}
 
 {% block content%}
-
+<div class="container">
 
 
 <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:upload_telegram' %}" method="post">
@@ -17,4 +17,6 @@
         {% endbuttons %}
 
 </form>
+</div>
+
 {% endblock %}

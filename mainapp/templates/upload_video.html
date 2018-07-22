@@ -1,7 +1,7 @@
 {% extends 'index.html' %} {% load bootstrap4 %}
 {% block title%} upload youtube{% endblock %}
 {% block content%}
-
+<div class="container">
 <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:upload_video' %}" method="post">
 
     {% csrf_token %}
@@ -13,4 +13,5 @@
         {% endbuttons %}
 
 </form>
+</div>
 {% endblock %}

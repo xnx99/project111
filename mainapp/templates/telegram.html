@@ -1,13 +1,15 @@
 {% extends 'index.html' %} {% load static %}
 {% block title%}telegram {% endblock %}
-{% block content %}
 
+{% block content %}
+<div class="container">
     <!-- Custom styles for this template -->
 <link href="{% static 'css/telegram.css' %}" rel="stylesheet">
     <!--Custom styles for this Fonts-->
 <link href="https://fonts.googleapis.com/css?family=Coda+Caption:800" rel="stylesheet">
 <br>
 <style>
+
 body {
     background-color: #D3D3D3;
     background-image: url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX32046963.jpg");
@@ -129,6 +131,9 @@ font-family: 'Coda Caption', sans-serif;
     <a href="{% url 'mainapp:upload_telegram'%}" class="btn w3-circle btn-primary" role="button" style="float: right;">+</a>
 <br>
 <br>
+</section>
+</section>
+</div>
 {% endblock%}
 
 

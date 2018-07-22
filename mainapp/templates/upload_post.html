@@ -3,6 +3,7 @@
 {% block title%}post something!{% endblock %}
 
 {% block content%}
+<div class="container">
 <br>
 <br>
 <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:upload_post' %}" method="post">
@@ -17,4 +18,5 @@
 
 </form>
 <br>
+</div>
 {% endblock %}

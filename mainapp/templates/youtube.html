@@ -1,15 +1,17 @@
 {% extends 'index.html' %} {% load static %}
 {% block title%}youtube{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/toastr.min.css' %}">
 
-{% block content %}
+{% endblock %}
     <!-- Bootstrap core CSS -->
 <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Custom fonts for this template -->
 <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 <link href="{% static 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' %}" rel="stylesheet" type="text/css">
-<link href=' https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
-<link href="https://fonts.googleapis.com/css?family=Merriweather:700" rel="stylesheet">
+<link href="{% static ' https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' %}" type='text/css'>
+<link href="{% static 'https://fonts.googleapis.com/css?family=Merriweather:700' %}" rel="stylesheet">
     <!-- Custom styles for this template -->
 <link href="{% static 'css/youtube.css' %}" rel="stylesheet">
 
@@ -17,7 +19,7 @@
         $("#Categorization").prop("disabled", true);
 </script>
 
-
+{% block content %}
 <style>
 <!--body{-->
 <!--background-color: #D3D3D3 ;-->
@@ -34,7 +36,7 @@
     background-repeat: no-repeat, repeat;
     height: 100%;
     background-position: center;
-    background-size: cover;
+    background-size: auto;
  }
 .image_microbiology{
     background-image: url("https://previews.123rf.com/images/seamartini/seamartini1503/seamartini150300523/37827312-amebas-bacteria-or-microbial-lifeforms-seamless-pattern-for-science-or-medicine-design.jpg");
@@ -119,7 +121,8 @@ border-radius: 5px;
 
     <br>
     <h3 style="font-family: 'Lobster Two', cursive;
-                color: black;">
+                color: black;
+                text-align: center;">
         Biology Section</h3>
     <section class="image_biology">
     <br>
@@ -156,7 +159,8 @@ border-radius: 5px;
 <section>
 
     <h3 style="font-family: 'Lobster Two', cursive;
-                color: red;">
+                color: red;
+                text-align: center;">
         Microbiology Section</h3>
     <section class="image_microbiology">
     <br>
@@ -192,7 +196,8 @@ border-radius: 5px;
 <br>
 <section>
     <h3 style="font-family: 'Lobster Two', cursive;
-                color: green;">
+                color: green;
+                text-align: center;">
         Physiology Section</h3>
     <section class="image_physiology">
     <br>
@@ -200,28 +205,32 @@ border-radius: 5px;
         <div class="span4" >
             <div class="thumbnail">
                 <div class="row">
-                    {% for a in physiology %}
+                    {% for video in physiology %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                          <a href="{{a.link}}" class="custom-card">
+                          <a href="{{video.link}}" class="custom-card">
                           <div class="card bg-warning text-white h-100" style="#" >
-                          {%if "embed" in a.link %}
+                          {%if "embed" in video.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
-                                       src="{{a.link}}">
+                                       src="{{video.link}}">
                               </div>
                           {% else %}
                               <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
                           {% endif %}
-                          <h5 class="card-title">{{ a.Title }}</h5>
+                          <h5 class="card-title">{{ video.Title }}</h5>
                           <hr>
-                          <p class="card-text">{{ a.Description }}</p>
-                          <p class="card-text2">{{a.Categorization}}</p>
+                          <p class="card-text">{{ video.Description }}</p>
+                          <p class="card-text2">{{video.Categorization}}</p>
                           </div>
                           </a>
+                          {% if video.is_deleted == False %}
+                            <button id="delete"  data-url="{% url 'mainapp:delete_video' video.pk %}" data-video-pk='{{ video.pk }}'> DELETE </button>
+                          {% endif  %}
                           </div>
                     {% endfor %}
                 </div>
             </div>
+        </div>
         </div>
     </ul>
 </section>
@@ -237,4 +246,34 @@ border-radius: 5px;
 <br>
 <br>
 <br>
+
 {% endblock %}
+{% block javascript %}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+             $('#delete').click(function(){
+                      console.log('hi')
+                       video_pk = $(this).data('video-pk');
+                       url = $(this).data('url');
+                    }
+                      $.ajax({
+                          url: url,
+                          type: 'POST',
+                          success: function(data){
+                            if (data.message == 'success'){
+                                window.location.href = data.url;
+                              toastr.success("Your video was removed.")
+                            } else {
+                            }
+                          }
+                      });
+             });
+    });
+
+</script>
+</Html>
+{% endblock%}
+

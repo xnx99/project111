@@ -258,3 +258,21 @@ def delete_article(request, pk):
     article.save()
 
     return  {"message": "success"}
+
+
+@require_POST
+@csrf.csrf_exempt
+@decorators.ajax_only
+def delete_video(request, pk):
+    video = get_object_or_404(Youtube, pk=pk)
+        # PERMISSION CHECK
+    if not request.user.is_superuser and \
+       not video.uploadedby == request.user :
+        raise Exception("You cannot delete this video!")
+
+
+    video.is_deleted = True
+    video.save()
+
+    return  {"message": "success"}
+

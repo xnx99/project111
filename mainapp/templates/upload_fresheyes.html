@@ -3,7 +3,7 @@
 {% block title%}upload file{% endblock %}
 
 {% block content%}
-
+<div class="container">
 
 
 <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:upload_fresheyes' %}" method="post">
@@ -17,4 +17,5 @@
         {% endbuttons %}
 
 </form>
+</div>
 {% endblock %}
