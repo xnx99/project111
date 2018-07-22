@@ -258,10 +258,10 @@ border-radius: 5px;
                       console.log('hi')
                        video_pk = $(this).data('video-pk');
                        url = $(this).data('url');
-                    }
+
                       $.ajax({
-                          url: url,
-                          type: 'POST',
+                          'url': url,
+                              type: 'POST',
                           success: function(data){
                             if (data.message == 'success'){
                                 window.location.href = data.url;
@@ -274,6 +274,5 @@ border-radius: 5px;
     });
 
 </script>
-</Html>
 {% endblock%}
 
