@@ -255,21 +255,20 @@ border-radius: 5px;
     $(document).ready(function () {
 
              $('#delete').click(function(){
-                      console.log('hi')
-                       video_pk = $(this).data('video-pk');
-                       url = $(this).data('url');
-                    }
-                      $.ajax({
-                          url: url,
-                          type: 'POST',
-                          success: function(data){
-                            if (data.message == 'success'){
-                                window.location.href = data.url;
-                              toastr.success("Your video was removed.")
-                            } else {
-                            }
-                          }
-                      });
+                  console.log('hi');
+                  video_pk = $(this).data('video-pk');
+                  url = $(this).data('url');
+
+                  $.ajax({
+                      url: url,
+                      type: 'POST',
+                      success: function(data){
+                        if (data.message == 'success'){
+                            window.location.href ="{% url 'mainapp:youtube' %}";
+                        } else {
+                        }
+                      }
+                  });
              });
     });
 

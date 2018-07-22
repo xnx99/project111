@@ -19,5 +19,5 @@ urlpatterns = [
     # url(r'(?P<pk>\d+)/studygroup/(?P<selector>[\-\d\w_]+)/$', views.list_posts, name='list_posts_by_selector'),
     #AJAX
     url(r'^ajax/delete/(?P<pk>\d+)$', views.delete_article, name='delete_article'),
-    url(r'^ajax/delete/(?P<pk>\d+)$', views.delete_video, name='delete_video'),
+    url(r'^ajax/video/delete/(?P<pk>\d+)$', views.delete_video, name='delete_video'),
 ]
