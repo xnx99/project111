@@ -26,6 +26,8 @@
 <!--}-->
 .align-items-stretch{
     margin-bottom: 10px ;
+    margin-right: -300px;
+    margin-left:-20px;
 }
 .custom-card:hover {
   color: inherit;
@@ -36,7 +38,7 @@
     background-repeat: no-repeat, repeat;
     height: 100%;
     background-position: center;
-    background-size: auto;
+    background-size: cover;
  }
 .image_microbiology{
     background-image: url("https://previews.123rf.com/images/seamartini/seamartini1503/seamartini150300523/37827312-amebas-bacteria-or-microbial-lifeforms-seamless-pattern-for-science-or-medicine-design.jpg");
@@ -118,46 +120,49 @@ border-radius: 5px;
     <meta charset="UTF-8">
         <h5 class="mt-0">{{ video.Title }}</h5>
 <br>
-
-    <br>
+<section>
     <h3 style="font-family: 'Lobster Two', cursive;
                 color: black;
                 text-align: center;">
-        Biology Section</h3>
+         Biology Section</h3>
     <section class="image_biology">
     <br>
     <ul class="thumbnails">
         <div class="span4" >
             <div class="thumbnail">
                 <div class="row">
-                    {% for a in biology %}
+                    {% for video in biology  %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                          <a href="{{a.link}}" class="custom-card">
+                          <a href="{{video.link}}" class="custom-card">
                           <div class="card bg-info text-white h-100" style="border: 5px solid black;border-radius: 5px;" >
-                          {%if "embed" in a.link %}
+                          {%if "embed" in video.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
-                                       src="{{a.link}}">
+                                       src="{{video.link}}">
                               </div>
                           {% else %}
                               <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
                           {% endif %}
-                          <h5 class="card-title">{{ a.Title }}</h5>
+                          <h5 class="card-title">{{ video.Title }}</h5>
                           <hr>
-                          <p class="card-text">{{ a.Description }}</p>
-                          <p class="card-text2 ">{{a.Categorization}}</p>
-                          </div>
+                          <p class="card-text">{{ video.Description }}</p>
+                          <p class="card-text2">{{video.Categorization}}</p>
                           </a>
+                          {% if video.is_deleted == False %}
+                           <button id="delete"  data-url="{% url 'mainapp:delete_video' video.pk %}" data-video-pk='{{ video.pk }}' style="background-color: black ;
+border: transparent;
+font-size: 150%;
+color: #f44336 ;"> DELETE </button>
+                          {% endif  %}
+                          </div>
                           </div>
                     {% endfor %}
                 </div>
-            </div>
         </div>
     </ul>
 </section>
 <br>
 <section>
-
     <h3 style="font-family: 'Lobster Two', cursive;
                 color: red;
                 text-align: center;">
@@ -168,28 +173,33 @@ border-radius: 5px;
         <div class="span4" >
             <div class="thumbnail">
                 <div class="row">
-                    {% for a in microbiology %}
+                    {% for video in microbiology  %}
                           <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                          <a href="{{a.link}}" class="custom-card">
-                          <div class="card bg-dark text-white h-100">
-                          {%if "embed" in a.link %}
+                          <a href="{{video.link}}" class="custom-card">
+                          <div class="card bg-dark text-white h-100" >
+                          {%if "embed" in video.link %}
                               <div class="flex-video widescreen ">
                                 <embed width="269" height="150"
-                                       src="{{a.link}}">
+                                       src="{{video.link}}">
                               </div>
                           {% else %}
                               <img class="card-img-top" src="{% static 'img/Youtube.png' %}" alt="Card image cap">
                           {% endif %}
-                          <h5 class="card-title">{{ a.Title }}</h5>
+                          <h5 class="card-title">{{ video.Title }}</h5>
                           <hr>
-                          <p class="card-text">{{ a.Description }}</p>
-                          <p class="card-text2">{{a.Categorization}}</p>
-                          </div>
+                          <p class="card-text">{{ video.Description }}</p>
+                          <p class="card-text2">{{video.Categorization}}</p>
                           </a>
+                          {% if video.is_deleted == False %}
+                            <button id="delete"  data-url="{% url 'mainapp:delete_video' video.pk %}" data-video-pk='{{ video.pk }}' style="background-color: black ;
+border: transparent;
+font-size: 150%;
+color: #f44336 ;"> DELETE </button>
+                          {% endif  %}
+                          </div>
                           </div>
                     {% endfor %}
                 </div>
-            </div>
         </div>
     </ul>
 </section>
@@ -221,16 +231,17 @@ border-radius: 5px;
                           <hr>
                           <p class="card-text">{{ video.Description }}</p>
                           <p class="card-text2">{{video.Categorization}}</p>
-                          </div>
                           </a>
                           {% if video.is_deleted == False %}
-                            <button id="delete"  data-url="{% url 'mainapp:delete_video' video.pk %}" data-video-pk='{{ video.pk }}'> DELETE </button>
+                            <button id="delete"  data-url="{% url 'mainapp:delete_video' video.pk %}" data-video-pk='{{ video.pk }}' style="background-color: black ;
+border: transparent;
+font-size: 150%;
+color: #f44336 ;"> DELETE </button>
                           {% endif  %}
+                          </div>
                           </div>
                     {% endfor %}
                 </div>
-            </div>
-        </div>
         </div>
     </ul>
 </section>
@@ -255,23 +266,6 @@ border-radius: 5px;
     $(document).ready(function () {
 
              $('#delete').click(function(){
-<<<<<<< HEAD
-                      console.log('hi')
-                       video_pk = $(this).data('video-pk');
-                       url = $(this).data('url');
-
-                      $.ajax({
-                          'url': url,
-                              type: 'POST',
-                          success: function(data){
-                            if (data.message == 'success'){
-                                window.location.href = data.url;
-                              toastr.success("Your video was removed.")
-                            } else {
-                            }
-                          }
-                      });
-=======
                   console.log('hi');
                   video_pk = $(this).data('video-pk');
                   url = $(this).data('url');
@@ -286,9 +280,10 @@ border-radius: 5px;
                         }
                       }
                   });
->>>>>>> eb34998dcc6eeb8d3a946dd7aae2c695d7cc817f
              });
     });
+
+
 
 </script>
 {% endblock%}

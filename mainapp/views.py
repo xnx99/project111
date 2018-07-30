@@ -31,9 +31,9 @@ def authentication(request):
 
 #youtube functions
 def youtube(request):
-    biology =Youtube.objects.filter(Categorization='B')
-    microbiology =Youtube.objects.filter(Categorization='M')
-    physiology =Youtube.objects.filter(Categorization='P')
+    biology =Youtube.objects.filter(Categorization='B' , is_deleted='False')
+    microbiology =Youtube.objects.filter(Categorization='M' , is_deleted='False')
+    physiology =Youtube.objects.filter(Categorization='P', is_deleted='False')
 
     return render(request, 'youtube.html', {'biology': biology,
                                              'microbiology':microbiology,
@@ -57,9 +57,9 @@ def Youtubefunction(request):
 #telegram functions
 def telegram(request):
 
-    biology =telegram_model.objects.filter(Categorization='B')
-    microbiology =telegram_model.objects.filter(Categorization='M')
-    physiology =telegram_model.objects.filter(Categorization='P')
+    biology =telegram_model.objects.filter(Categorization='B', is_deleted='False')
+    microbiology =telegram_model.objects.filter(Categorization='M',is_deleted='False')
+    physiology =telegram_model.objects.filter(Categorization='P',is_deleted='False')
 
     return render(request, 'telegram.html', {'biology': biology,
                                              'microbiology':microbiology,
@@ -80,14 +80,6 @@ def telegramfunction(request):
 
 
 #Fresh eyes functions
-def fresh_eyes (request):
-    biology =fresheyes_post.objects.filter(Categorization='B')
-    microbiology =fresheyes_post.objects.filter(Categorization='M')
-    physiology =fresheyes_post.objects.filter(Categorization='P')
-
-    return render(request, 'fresheyes.html', {'biology': biology,
-                                             'microbiology':microbiology,
-                                             'physiology':physiology})
 def fresheyesfunction (request):
     if request.method == 'POST':
         form = fresheyesForm(request.POST, request.FILES) #the diffrence here is the type of request
@@ -97,6 +89,63 @@ def fresheyesfunction (request):
     else:
         form = fresheyesForm()
     return render(request, "upload_fresheyes.html", {'form': form})
+
+def fresheyes_commentForm(request):
+    if request.method == 'POST':
+        form = commentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mainapp:fresh_eyes'))
+
+    elif request.method == 'GET':
+
+        form = commentForm()
+    return {}
+
+def fresh_eyes(request, selector=None):
+    context = {}
+    problem = fresheyes_post.objects.filter(is_deleted= False)
+
+    if selector:
+        if selector == 'biology':
+            context['list'] = problem.filter(Categorization='B')
+            context['list_name'] = "Biology"
+        elif selector == 'microbiology':
+            context['list'] = problem.filter(Categorization='M')
+            context['list_name'] = "microbiology"
+        elif selector == 'physiology':
+            context['list'] = problem.filter(Categorization='P')
+            context['list_name'] = "physiology"
+        else:
+            raise Http404
+        return render(request, 'fresheyes.html', context)
+    else:
+        context['list'] = problem
+        context['list_name'] = "All"
+    return render(request, "fresheyes.html", context)
+
+def show_problem(request,problem_id):
+    problem = get_object_or_404(fresheyes_post,problem_id=problem_id)
+    comment2 = comment.objects.all()
+    context= {'problem':problem,
+              'comment2':comment2}
+    # if request.method == 'POST':
+    #     instance = comment(post=article,uploadedby=request.user)
+    #     form = commentForm(request.POST, instance=instance)
+    #     if form.is_valid():
+    #          form.save()
+    #          return HttpResponseRedirect(
+    #             reverse("mainapp:show_post",
+    #                     args=(pk)))
+    #
+    # elif request.method == 'GET':
+    #     form = commentForm()
+    # context['form']= form
+
+    return render(request, 'fresheyes2.html',context)
+
+
+
 
 
 #study group functions
@@ -148,7 +197,8 @@ def show_post(request,pk):
     article = get_object_or_404(post,pk=pk)
     comment1 = comment.objects.all()
     context= {'article':article,
-              'comment1':comment1}
+              'comment1':comment1
+     }
     if request.method == 'POST':
         instance = comment(post=article,uploadedby=request.user)
         form = commentForm(request.POST, instance=instance)
@@ -276,3 +326,18 @@ def delete_video(request, pk):
 
     return  {"message": "success"}
 
+@require_POST
+@csrf.csrf_exempt
+@decorators.ajax_only
+def delete_channel(request, pk):
+    channel = get_object_or_404(telegram_model, pk=pk)
+        # PERMISSION CHECK
+    if not request.user.is_superuser and \
+       not channel.uploadedby == request.user :
+        raise Exception("You cannot delete this channel!")
+
+
+    channel.is_deleted = True
+    channel.save()
+
+    return  {"message": "success"}

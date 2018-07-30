@@ -1,7 +1,105 @@
 {% extends 'index.html' %} {% load static %}
 {% block title%}Fresh Eyes {% endblock %}
 
-
 {% block content %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'fresh eyes/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'fresh eyes/css/2-col-portfolio.css' %}" rel="stylesheet">
+
+<style>
+.height{
+    margin-bottom: 20px;
+  }
+
+.button {
+    background-color: #FFD700 ;
+    border: none;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.button1 {border-radius: 50%;}
+.button2 {border-radius: 70%;}
+.button3 {border-radius: 80%;}
+</style>
+
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Page Heading -->
+      <h1 class="my-4">Fresh Eyes
+        <small>where you have more than two eyes</small>
+      </h1>
+
+      <div class="row">
+        {% for a in list %}
+        <div class="col-lg-6 portfolio-item height">
+          <div class="card h-100">
+            <img class="card-img-top" src="https://images.techhive.com/images/article/2016/12/googlekeeplogo-100699898-large.jpg" alt="">
+            <div class="card-body">
+              <h3 class="card-title">
+                <h3>{{ a.Title }}</h3>
+                  <br>
+                <a href="{% url 'mainapp:fresh_eyes' problem_id %} class='btn btn-primary' ">Help &rarr;</a>
+              </h3>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- /.row -->
+
+      <!-- Pagination -->
+      <ul class="pagination justify-content-center">
+        <!--<li class="page-item">-->
+          <!--<a class="page-link" href="#" aria-label="Previous">-->
+            <!--<span aria-hidden="true">&laquo;</span>-->
+            <!--<span class="sr-only">Previous</span>-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="page-item">-->
+          <!--<a class="page-link" href="#">1</a>-->
+        <!--</li>-->
+        <!--<li class="page-item">-->
+          <!--<a class="page-link" href="#">2</a>-->
+        <!--</li>-->
+        <!--<li class="page-item">-->
+          <!--<a class="page-link" href="#">3</a>-->
+        <!--</li>-->
+        <!--<li class="page-item">-->
+          <!--<a class="page-link" href="#" aria-label="Next">-->
+            <!--<span aria-hidden="true">&raquo;</span>-->
+            <!--<span class="sr-only">Next</span>-->
+          <!--</a>-->
+        <!--</li>-->
+
+          <a href="{% url 'mainapp:fresh_eyes' 'biology' %}"><button class="button button1">Biology</button></a>
+          <a href="{% url 'mainapp:fresh_eyes' 'microbiology' %}"><button class="button button2">Microbiology</button></a>
+          <a href="{% url 'mainapp:fresh_eyes' 'physiology' %}"><button class="button button3">Physiology</button></a>
+      </ul>
+
+    </div>
+    <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 {% endblock%}

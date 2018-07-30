@@ -16,6 +16,7 @@
     <!-- Bootstrap core JavaScript -->
 
 
+
 {% block content %}
     <!-- Page Content -->
     <div class="container">
@@ -24,18 +25,11 @@
 
         <!-- Post Content Column -->
         <div class="col-lg-8">
-
           <!-- Title -->
           <h1 class="mt-4">{{ article.title }}</h1>
-
           <!-- Preview Image -->
           <img class="img-fluid rounded" src="{{ article.image }}" alt="">
             <hr>
-
-
-
-
-
           <!-- Post Content -->
           <p class="lead"> {{ article.body}}</p>
             <hr>
@@ -44,26 +38,28 @@
             by
             {{ article.uploadedby }}
               {% if article.is_deleted == False %}
-             <button id="delete"  data-url="{% url 'mainapp:delete_article' article.pk %}" data-article-pk='{{ article.pk }}'> DELETE </button>
+             <button id="delete"  data-url="{% url 'mainapp:delete_article' article.pk %}" data-article-pk='{{ article.pk }}' style="
+background-color: transparent;
+border-radius: 100px;
+border: transparent;
+font-size: 100%;
+">X</button>
               {% endif  %}
           </p>
           <!-- Date/Time -->
           <p>{{article.pub_date}}</p>
-
           <hr>
-
-
           <!-- Comments Form -->
-          <div class="card my-4">
+          <div class="card my-4 style='background-color: black;'">
             <h5 class="card-header">Leave a Comment:</h5>
-            <div class="card-body">
+            <div class="card-body ">
           <form class="form" enctype="multipart/form-data"  action="{% url 'mainapp:show_post' article.pk %}" method="post">
 
               {% csrf_token %}
               {% bootstrap_form form %}
           {% buttons %}
                   <button type="submit" class="btn btn-primary">
-                       أرسل
+                       علق
                   </button>
                   {% endbuttons %}
               </form>
@@ -101,7 +97,6 @@
 
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-
           <!-- Search Widget -->
           <div class="card my-4">
             <h5 class="card-header">Search</h5>
@@ -114,7 +109,6 @@
               </div>
             </div>
           </div>
-
           <!-- Categories Widget -->
           <div class="card my-4">
             <h5 class="card-header">Categories</h5>
@@ -149,25 +143,14 @@
               </div>
             </div>
           </div>
-
           <!-- Side Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">#</h5>
-            <div class="card-body">
-              #
-            </div>
+
           </div>
-
         </div>
-
       </div>
       <!-- /.row -->
-
     </div>
     <!-- /.container -->
-
-
-
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

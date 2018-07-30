@@ -1,0 +1,73 @@
+{% extends 'index.html' %} {% load static %}
+{% block title%}Fresh Eyes {% endblock %}
+
+{% block content %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4">
+        <small>Secondary Text</small>
+      </h1>
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+          <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">Problem Description</h3>
+          <p>{{ a.help_type }}</p>
+          <h3 class="my-3">Problem Details</h3>
+          <ul>
+            <li>{{ a.Categorization }}</li>
+            <li>Dolor Sit Amet</li>
+            <li>Consectetur</li>
+            <li>Adipiscing Elit</li>
+          </ul>
+          <button type="button">
+              {{ a.file }}
+          </button>
+        </div>
+
+      </div>
+
+         <!--Comments Form-->
+        <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+
+
+
+        </div>
+    </div>
+
+   <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    </div>
+{% endblock %}
+
+
+
+    <!--uploadedby=models.ForeignKey(User ,null=True)-->
+
+    <!--Date= models.DateTimeField('date published',auto_now_add=True)-->
+    <!--is_deleted= models.BooleanField(verbose_name="هل المستند محذوف؟",default=False)-->
+

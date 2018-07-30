@@ -65,20 +65,88 @@ font-family: 'Coda Caption', sans-serif;
                  color: red;
                  background-color: black;
 }
+
+.wrap{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.clicker{
+  background-color: white;
+  outline: none;
+  font-weight: 600;
+	  position:absolute;
+  cursor: pointer;
+  padding: 0;
+	  border: none;
+	  height: 50px;
+	  width: 50px;
+  left: 4px;
+  top: 4px;
+	  border-radius: 100px;
+	  z-index: 2;
+}
+
+.clicker:active{
+	  transform: translate(0, 1px);
+  height: 63px;
+	  box-shadow: 0px 1px 0 0 rgb(190,190,190) inset;
+}
+
+.circle{
+	  position: relative;
+  border-radius:40px;
+	  width: 60px;
+	  height: 60px;
+	  z-index: 1;
+}
+
+.circle.third{
+  border-radius: 0;
+}
+
+.clicker:hover + .circle, .clicker:active + .circle {
+	  animation: rotator linear .3s infinite;
+}
+
+@keyframes rotator{
+	  from{ transform: rotate(0deg); }
+	  to{ transform: rotate(360deg); }
+}
+.angled.third{
+			background-image: linear-gradient(20deg,
+                transparent 0%,
+                transparent 30%,
+                blue 30%,
+								red 70%,
+                transparent 70%,
+                transparent 100%);
+}
 </style>
+<section>
     <h3 class="font">Biology Section</h3>
 <section class="biology_image">
     <br>
     <div class="row">
-    {% for a in biology%}
+    {% for channel in biology%}
         <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
         <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{ a.Title }}</h5>
+            <h5 class="card-title">{{ channel.Title }}</h5>
             <hr>
-            <p class="card-text">{{ a.Description }}</p>
-            <a href="{{a.link}}" class="btn btn-primary">Go to the channel!</a>
+            <p class="card-text">{{ channel.Description }}</p>
+            <a href="{{channel.link}}" class="btn btn-primary">Go to the channel!</a>
+            {% if channel.is_deleted == False %}
+                <div class="wrap">
+                <button  id="delete" data-url="{% url 'mainapp:delete_channel' channel.pk %}" data-channel-pk='{{ channel.pk }}' class="clicker faster">Delete</button>
+                <div class="circle angled third"></div>
+                </div>
+            {% endif  %}
           </div>
         </div>
         </div>
@@ -91,15 +159,21 @@ font-family: 'Coda Caption', sans-serif;
 <section class="microbiology_image">
     <br>
     <div class="row">
-    {% for a in microbiology%}
+    {% for channel in microbiology%}
         <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
         <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{ a.Title }}</h5>
+            <h5 class="card-title">{{ channel.Title }}</h5>
             <hr>
-            <p class="card-text">{{ a.Description }}</p>
-            <a href="{{a.link}}" class="btn btn-primary">Go to the channel!</a>
+            <p class="card-text">{{ channel.Description }}</p>
+            <a href="{{channel.link}}" class="btn btn-primary">Go to the channel!</a>
+            {% if channel.is_deleted == False %}
+                <div class="wrap">
+                <button  id="delete" data-url="{% url 'mainapp:delete_channel' channel.pk %}" data-channel-pk='{{ channel.pk }}' class="clicker faster">Delete</button>
+                <div class="circle angled third"></div>
+                </div>
+            {% endif  %}
           </div>
         </div>
         </div>
@@ -112,15 +186,21 @@ font-family: 'Coda Caption', sans-serif;
 <section class="physiology_image">
     <br>
     <div class="row">
-    {% for a in physiology%}
+    {% for channel in physiology%}
         <div class="col-xl-4 col-md-6 col-sm-12 d-flex align-items-stretch">
         <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{% static 'img/Telegram.png' %}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">{{ a.Title }}</h5>
+            <h5 class="card-title">{{ channel.Title }}</h5>
             <hr>
-            <p class="card-text">{{ a.Description }}</p>
-            <a href="{{a.link}}" class="btn btn-primary">Go to the channel!</a>
+            <p class="card-text">{{ channel.Description }}</p>
+            <a href="{{channel.link}}" class="btn btn-primary">Go to the channel!</a>
+            {% if channel.is_deleted == False %}
+                <div class="wrap">
+                <button  id="delete" data-url="{% url 'mainapp:delete_channel' channel.pk %}" data-channel-pk='{{ channel.pk }}' class="clicker faster">Delete</button>
+                <div class="circle angled third"></div>
+                </div>
+            {% endif  %}
           </div>
         </div>
         </div>
@@ -133,7 +213,32 @@ font-family: 'Coda Caption', sans-serif;
 <br>
 </section>
 </section>
+</section>
+
 </div>
 {% endblock%}
+{% block javascript %}
 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+             $('#delete,#delete1,#delete2').click(function(){
+                  console.log('hi');
+                  channel_pk = $(this).data('channel-pk');
+                  url = $(this).data('url');
+
+                  $.ajax({
+                      url: url,
+                      type: 'POST',
+                      success: function(data){
+                        if (data.message == 'success'){
+                            window.location.href ="{% url 'mainapp:telegram' %}";
+                        } else {
+                        }
+                      }
+                  });
+             });
+    });
+</script>
+{% endblock%}
 
