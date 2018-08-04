@@ -7,8 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
-    <!-- Bootstrap core CSS -->
+   <!-- Bootstrap core CSS -->
     <link href="{% static 'fresh eyes/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -37,7 +36,6 @@
 </style>
 
 
-
     <!-- Page Content -->
     <div class="container">
 
@@ -46,8 +44,9 @@
         <small>where you have more than two eyes</small>
       </h1>
 
+
       <div class="row">
-        {% for a in list %}
+        {% for a in problem %}
         <div class="col-lg-6 portfolio-item height">
           <div class="card h-100">
             <img class="card-img-top" src="https://images.techhive.com/images/article/2016/12/googlekeeplogo-100699898-large.jpg" alt="">
@@ -55,14 +54,14 @@
               <h3 class="card-title">
                 <h3>{{ a.Title }}</h3>
                   <br>
-                <a href="{% url 'mainapp:fresh_eyes' problem_id %} class='btn btn-primary' ">Help &rarr;</a>
+                <a href="{% url 'mainapp:fresheyes' %} class='btn btn-primary' ">Help &rarr;</a>
               </h3>
             </div>
           </div>
         </div>
         {% endfor %}
       </div>
-      <!-- /.row -->
+
 
       <!-- Pagination -->
       <ul class="pagination justify-content-center">
@@ -88,9 +87,9 @@
           <!--</a>-->
         <!--</li>-->
 
-          <a href="{% url 'mainapp:fresh_eyes' 'biology' %}"><button class="button button1">Biology</button></a>
-          <a href="{% url 'mainapp:fresh_eyes' 'microbiology' %}"><button class="button button2">Microbiology</button></a>
-          <a href="{% url 'mainapp:fresh_eyes' 'physiology' %}"><button class="button button3">Physiology</button></a>
+          <a href="{% url 'mainapp:fresheyes' 'biology' %}"><button class="button button1">Biology</button></a>
+          <a href="{% url 'mainapp:fresheyes' 'microbiology' %}"><button class="button button2">Microbiology</button></a>
+          <a href="{% url 'mainapp:fresheyes' 'physiology' %}"><button class="button button3">Physiology</button></a>
       </ul>
 
     </div>
@@ -100,6 +99,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
 
 
 {% endblock%}

@@ -80,72 +80,49 @@ def telegramfunction(request):
 
 
 #Fresh eyes functions
-def fresheyesfunction (request):
+def upload_fresheyes (request):
     if request.method == 'POST':
         form = fresheyesForm(request.POST, request.FILES) #the diffrence here is the type of request
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('mainapp:fresh_eyes'))
+            return HttpResponseRedirect(reverse('mainapp:fresheyes'))
     else:
         form = fresheyesForm()
     return render(request, "upload_fresheyes.html", {'form': form})
 
-def fresheyes_commentForm(request):
+def upload_comment(request):
     if request.method == 'POST':
         form = commentForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('mainapp:fresh_eyes'))
+            return HttpResponseRedirect(reverse('mainapp:fresheyes'))
 
     elif request.method == 'GET':
 
         form = commentForm()
     return {}
 
-def fresh_eyes(request, selector=None):
+def fresheyes (request,selector=None):
     context = {}
     problem = fresheyes_post.objects.filter(is_deleted= False)
 
     if selector:
         if selector == 'biology':
-            context['list'] = problem.filter(Categorization='B')
-            context['list_name'] = "Biology"
+            context['problem'] = problem.filter(Categorization='B')
+            context['problem_type'] = "Biology"
         elif selector == 'microbiology':
-            context['list'] = problem.filter(Categorization='M')
-            context['list_name'] = "microbiology"
+            context['problem'] = problem.filter(Categorization='M')
+            context['problem_type'] = "microbiology"
         elif selector == 'physiology':
-            context['list'] = problem.filter(Categorization='P')
-            context['list_name'] = "physiology"
+            context['problem'] = problem.filter(Categorization='P')
+            context['problem_type'] = "physiology"
         else:
             raise Http404
         return render(request, 'fresheyes.html', context)
     else:
-        context['list'] = problem
-        context['list_name'] = "All"
+        context['problem'] = problem
+        context['problem_type'] = "All"
     return render(request, "fresheyes.html", context)
-
-def show_problem(request,problem_id):
-    problem = get_object_or_404(fresheyes_post,problem_id=problem_id)
-    comment2 = comment.objects.all()
-    context= {'problem':problem,
-              'comment2':comment2}
-    # if request.method == 'POST':
-    #     instance = comment(post=article,uploadedby=request.user)
-    #     form = commentForm(request.POST, instance=instance)
-    #     if form.is_valid():
-    #          form.save()
-    #          return HttpResponseRedirect(
-    #             reverse("mainapp:show_post",
-    #                     args=(pk)))
-    #
-    # elif request.method == 'GET':
-    #     form = commentForm()
-    # context['form']= form
-
-    return render(request, 'fresheyes2.html',context)
-
-
-
 
 
 #study group functions

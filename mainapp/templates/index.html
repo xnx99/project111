@@ -48,15 +48,15 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'mainapp:list_posts' %}">Study Group</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'mainapp:fresh_eyes' %}">Fresh Eyes</a>
+          <a class="dropdown-item" href="fresheyes.html">Fresh Eyes</a>
         </div>
       </li>
     </ul>
 
         <div class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link">
         <span class="avatar avatar-online">
-        <img src="{% static 'img/pikachu.png' %}" alt="avatar">
-
+        <img src="#" alt="avatar">
+<!--{% static 'img/pikachu.png' %}-->
         <!--i have replace userena_profile_edit and userena_signout with # sign because i did not make the templates yet-->
         </span>
         <span class="user-name">{{ user.profile.first_name|default:user.username }}</span></a>

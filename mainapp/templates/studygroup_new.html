@@ -81,15 +81,15 @@ body{
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-          <h1 class="my-4">Study Group
+          <h1 class="my-4">Study Group]
             <small>Posts</small>
           </h1>
 
           <!-- Blog Post -->
          {% for article in list %}
           <div class="card mb-4" >
-              {% if article.image %}
-                <img class="card-img-top" src="{{ article.image.url }}" alt="Card image cap">
+              {% if article.image.url %}
+                <img class="card-img-top" src="{{article.image.url}}" alt="Card image cap">
               {% endif%}
               <hr>
             <div class="card-body">
@@ -104,22 +104,8 @@ body{
               <a href="#">{{article.uploadedby}}</a>
 
             </div>
-
           </div>
           {% endfor %}
-
-
-
-
-          <!-- Pagination -->
-          <!--<ul class="pagination justify-content-center mb-4">-->
-            <!--<li class="page-item">-->
-              <!--<a class="page-link" href="#">&larr; Older</a>-->
-            <!--</li>-->
-            <!--<li class="page-item disabled">-->
-              <!--<a class="page-link" href="#">Newer &rarr;</a>-->
-            <!--</li>-->
-          <!--</ul>-->
 
         </div>
 
@@ -150,9 +136,6 @@ body{
                     <li>
                       <a href="{% url 'mainapp:list_posts' 'microbiology' %}">Microbiology Section</a>
                     </li>
-                    <!--<li>-->
-                      <!--<a href="#">Physiology Section</a>-->
-                    <!--</li>-->
                   </ul>
                 </div>
                 <div class="col-lg-6">
@@ -160,12 +143,6 @@ body{
 <li>
                       <a href="{% url 'mainapp:list_posts' 'physiology' %}">Physiology Section</a>
                     </li>
-                    <!--<li>-->
-                      <!--<a href="#">#</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                      <!--<a href="#">#</a>-->
-                    <!--</li>-->
                   </ul>
                 </div>
               </div>
